@@ -4,16 +4,20 @@
 #include <cstdlib>
 #include <cstdio>
 
+#include "include/figure.h"
+#include "include/circle.h"
 using namespace std;
 
 int SCREEN_W = 1080, SCREEN_H = 720, FPS = 30;
 
+Circle circle();
+
 void fps() {
-    
+    circle.Move(100, 100);
 }
 
 void draw() {
-    
+    circle.Draw();
 }
 
 int main(int argc, char **argv) {

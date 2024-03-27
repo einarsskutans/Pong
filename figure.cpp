@@ -1,8 +1,5 @@
 #include "include/figure.h"
 
-void Figure::Move() {
-
-}
-void Figure::Reset(Center pPos) {
-    pos = pPos;
+void Figure::Move(int px, int py) {
+    pos.x = px, pos.y = py;
 }

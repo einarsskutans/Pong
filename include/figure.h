@@ -5,11 +5,9 @@
 
 class Figure {
     public:
-        void Move();
-        virtual void Draw();
+        void Move(int px, int py);
+        virtual void Draw() = 0;
         Center pos, vel, size;
-    private:
-        void Reset(Center pPos);
 };
 
 #endif
