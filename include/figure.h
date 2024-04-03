@@ -5,7 +5,7 @@
 
 class Figure {
     public:
-        void Move(int px, int py);
+        void Move();
         virtual void Draw() = 0;
         Center pos, vel, size;
 };

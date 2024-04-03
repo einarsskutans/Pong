@@ -6,23 +6,28 @@
 
 #include "include/figure.h"
 #include "include/circle.h"
+#include "include/util.h"
+#include "include/pong.h"
 using namespace std;
 
-int SCREEN_W = 1080, SCREEN_H = 720, FPS = 30;
-
-Circle circle();
+Center center(300, 200), vel(10, 10), dimensions(50,50);
+Circle circle(center, vel, dimensions);
+Pong pong(1080, 720, 60);
 
 void fps() {
-    circle.Move(100, 100);
+    pong.Next();
 }
 
 void draw() {
-    circle.Draw();
+    al_clear_to_color(al_map_rgb(0, 0, 0));
+    pong.Draw();
 }
 
 int main(int argc, char **argv) {
+    pong.Add(&circle);
+
     srand(time(0));
-    if(!InitAllegro(SCREEN_W, SCREEN_H, FPS)) {
+    if(!InitAllegro(pong.SCREEN_W, pong.SCREEN_H, pong.FPS)) {
         DestroyAllegro();
         return 1;
     }

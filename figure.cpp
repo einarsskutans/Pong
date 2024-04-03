@@ -1,5 +1,6 @@
 #include "include/figure.h"
 
-void Figure::Move(int px, int py) {
-    pos.x = px, pos.y = py;
+void Figure::Move() {
+    pos.x = pos.x + vel.x;
+    pos.y = pos.y + vel.y;
 }
