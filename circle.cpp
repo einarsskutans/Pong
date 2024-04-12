@@ -9,9 +9,9 @@
 Circle::Circle() {
     std::cout << "\nDefault constructor called " << this;
 }
-Circle::Circle(Center pPos, Center pVel, Center pSize) {
+Circle::Circle(int px, int py, int pvelx, int pvely, int psizex, int psizey) {
     std::cout << "\nConstructor called " << this;
-    pos = pPos, vel = pVel, size = pSize;
+    pos.x = px, pos.y = py, vel.x = pvelx, vel.y = pvely, size.x = psizex, size.y = psizey;
 }
 Circle::~Circle() {
     std::cout << "\nDestructor called " << this;

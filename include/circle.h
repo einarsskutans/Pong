@@ -6,7 +6,7 @@
 class Circle : public Figure {
     public:
         Circle();
-        Circle(Center pPos, Center pVel, Center pSize);
+        Circle(int px, int py, int pvelx, int pvely, int psizex, int psizey);
         ~Circle();
         void Draw();
 };

@@ -1,18 +1,15 @@
 #include <iostream>
+#include "include/AllegroUtil.hpp"
+#include <windows.h>
+#include <cstdlib>
+#include <cstdio>
 
 #include "include/pong.h"
+#include "include/circle.h"
 
 Pong::Pong() {
     std::cout << "\nDefault constructor called " << this;
-    SCREEN_W = 540;
-    SCREEN_H = 450;
-    FPS = 60;
-}
-Pong::Pong(int pSCREEN_W, int pSCREEN_H, int pFPS) {
-    std::cout << "\nConstructor called " << this;
-    SCREEN_W = pSCREEN_W;
-    SCREEN_H = pSCREEN_H;
-    FPS = pFPS;
+    
 }
 Pong::~Pong() {
     std::cout << "\nDestructor called " << this;
@@ -24,6 +21,7 @@ void Pong::Next() {
     }
 }
 void Pong::Draw() {
+    al_clear_to_color(al_map_rgb(0, 0, 0));
     for (Figure* PFigure : PFigures) {
         PFigure->Draw();
     }

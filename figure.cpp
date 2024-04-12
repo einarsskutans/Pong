@@ -1,6 +1,8 @@
 #include "include/figure.h"
+#include "include/physics.h"
 
 void Figure::Move() {
-    pos.x = pos.x + vel.x;
-    pos.y = pos.y + vel.y;
+    Physics::CollideBounds(this);
+    pos.x += vel.x;
+    pos.y += vel.y;
 }

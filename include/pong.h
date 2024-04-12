@@ -6,15 +6,15 @@
 #include "circle.h"
 #include "figure.h"
 
-class Pong{
+const int SCREEN_W = 1080, SCREEN_H = 720, FPS = 60;
+
+class Pong {
     public:
         Pong();
-        Pong(int SCREEN_W, int SCREEN_H, int FPS);
         ~Pong();
         void Next();
         void Draw();
         void Add(Figure* PFigure);
-        int SCREEN_W, SCREEN_H, FPS;
         std::vector<Figure*> PFigures;
 };
 
