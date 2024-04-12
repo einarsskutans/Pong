@@ -15,7 +15,7 @@ Color white(255, 255, 255);
 Color blueBorder(71, 147, 175);
 
 Pong pong;
-Circle circle(SCREEN_W/2, SCREEN_H/2, 10, 10, 10, 10, white);
+Circle circle(SCREEN_W/2, SCREEN_H/2, 20, 10, 10, 10, white);
 Square square(SCREEN_W/8, SCREEN_H/8, 10, 10, 100, 100, blueBorder);
 
 void fps() {

@@ -17,5 +17,5 @@ Square::~Square() {
     std::cout << "\nDestructor called " << this;
 }
 void Square::Draw() {
-    al_draw_filled_rectangle(pos.x, pos.y, size.x, size.y, al_map_rgb(color.r, color.g, color.b));
+    al_draw_filled_rectangle(pos.x - size.x/2, pos.y - size.y/2, pos.x + size.x/2, pos.y + size.y/2, al_map_rgb(color.r, color.g, color.b));
 }

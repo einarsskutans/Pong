@@ -23,8 +23,8 @@ void Pong::Next() {
     }
 }
 void Pong::Draw() {
+    al_clear_to_color(al_map_rgb(0, 0, 0));
     for (Figure* PFigure : PFigures) {
-        al_clear_to_color(al_map_rgb(0, 0, 0));
         PFigure->Draw();
     }
 }
