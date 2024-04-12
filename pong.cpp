@@ -17,12 +17,14 @@ Pong::~Pong() {
 
 void Pong::Next() {
     for (Figure* PFigure : PFigures) {
-        PFigure->Move();
+        if (PFigure->vel.x != 999 && PFigure->vel.y != 999) { // Don't apply physics to these objects
+            PFigure->Move();
+        }
     }
 }
 void Pong::Draw() {
-    al_clear_to_color(al_map_rgb(0, 0, 0));
     for (Figure* PFigure : PFigures) {
+        al_clear_to_color(al_map_rgb(0, 0, 0));
         PFigure->Draw();
     }
 }
