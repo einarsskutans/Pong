@@ -8,6 +8,7 @@ class Figure {
         void Move();
         virtual void Draw() = 0;
         Center pos, vel, size;
+        Color color;
 };
 
 #endif

@@ -10,8 +10,11 @@
 #include "include/pong.h"
 using namespace std;
 
+Color white(255, 255, 255);
+
+
 Pong pong;
-Circle circle(SCREEN_W/2, SCREEN_H/2, 10, 10, 10, 10);
+Circle circle(SCREEN_W/2, SCREEN_H/2, 10, 10, 10, 10, white);
 
 void fps() {
     pong.Next();
