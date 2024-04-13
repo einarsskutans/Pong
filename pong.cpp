@@ -6,13 +6,24 @@
 
 #include "include/pong.h"
 #include "include/circle.h"
+#include "include/square.h"
 
 Pong::Pong() {
     std::cout << "\nDefault constructor called " << this;
-    
+
+    Color white(255, 255, 255);
+    Color blueBorder(71, 147, 175);
+    Circle *circle = new Circle(SCREEN_W/2, SCREEN_H/2, 20, 10, 10, 10, white);
+    Square *square = new Square(SCREEN_W/2, SCREEN_H/2, 999, 999, SCREEN_W - SCREEN_W/8, SCREEN_H - SCREEN_H/8, blueBorder);
+    Add(square);
+    Add(circle);
 }
 Pong::~Pong() {
     std::cout << "\nDestructor called " << this;
+
+    for (Figure* PFigure : PFigures) {
+        delete PFigure;
+    }
 }
 
 void Pong::Next() {
