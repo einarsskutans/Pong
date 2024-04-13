@@ -14,7 +14,6 @@ struct Color {
     Color(int pr, int pg, int pb);
     ~Color();
     int r, g, b;
-    static std::vector<Color> Colors;
 };
 
 #endif

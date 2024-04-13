@@ -2,6 +2,7 @@
 
 #include "include/util.h"
 
+// Center
 Center::Center() {
     std::cout << "\nDefault constructor called " << this;
 }
@@ -12,6 +13,8 @@ Center::Center(int px, int py) {
 Center::~Center() {
     std::cout << "\nDestructor called " << this;
 }
+
+// Color
 Color::Color() {
     std::cout << "\nDefault constructor called " << this;
 }

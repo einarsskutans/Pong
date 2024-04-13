@@ -11,9 +11,9 @@
 Pong::Pong() {
     std::cout << "\nDefault constructor called " << this;
 
-    Color white(255, 255, 255);
-    Color blueBorder(71, 147, 175);
-    Circle *circle = new Circle(SCREEN_W/2, SCREEN_H/2, 20, 10, 10, 10, white);
+    Color white(255, 255, 255), blueBorder(71, 147, 175), black(0, 0, 0); // Declare some colors
+
+    Circle *circle = new Circle(SCREEN_W/2, SCREEN_H/2, 20, 10, 10, 10, black);
     Square *square = new Square(SCREEN_W/2, SCREEN_H/2, 999, 999, SCREEN_W - SCREEN_W/8, SCREEN_H - SCREEN_H/8, blueBorder);
     Add(square);
     Add(circle);
