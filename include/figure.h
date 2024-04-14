@@ -7,7 +7,7 @@
 
 class Figure {
     public:
-        void Move(std::vector <Figure*> PFigures);
+        void Move(int px, int py);
         virtual void Draw() = 0;
         bool movable;
         Center pos, vel, size;

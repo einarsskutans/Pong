@@ -8,16 +8,21 @@
 #include "include/pong.h"
 #include "include/circle.h"
 #include "include/square.h"
+#include "include/physics.h"
 
 Pong::Pong() {
     std::cout << "\nDefault constructor called " << this;
 
     Color white(255, 255, 255), blueBorder(71, 147, 175), black(0, 0, 0); // Declare some colors
 
-    Circle *circle = new Circle(SCREEN_W/2, SCREEN_H/2, 5, 5, 25, 25, black, true);
-    Square *square = new Square(SCREEN_W/2, SCREEN_H/2, 0, 0, SCREEN_W - SCREEN_W/8, SCREEN_H - SCREEN_H/8, blueBorder, false);
-    Add(square);
-    Add(circle);
+    Circle *ball = new Circle(SCREEN_W/2, SCREEN_H/2, 5, 5, 25, 25, black, true);
+    Square *playingArea = new Square(SCREEN_W/2, SCREEN_H/2, 0, 0, SCREEN_W - SCREEN_W/8, SCREEN_H - SCREEN_H/8, blueBorder, false);
+    Square *racketLeft = new Square(playingArea->pos.x - playingArea->size.x/2 - 10, playingArea->pos.y, 0, 0, 20, playingArea->size.y/4, white, false);
+    Square *racketRight = new Square(playingArea->pos.x + playingArea->size.x/2 + 10, playingArea->pos.y, 0, 0, 20, playingArea->size.y/4, white, false);
+    Add(playingArea);
+    Add(ball);
+    Add(racketLeft);
+    Add(racketRight);
 }
 Pong::~Pong() {
     std::cout << "\nDestructor called " << this;
@@ -25,10 +30,11 @@ Pong::~Pong() {
     std::for_each(PFigures.cbegin(), PFigures.cend(), [](Figure* PFigure){delete PFigure;});
 }
 
-void Pong::Next() {
-    for (Figure* PFigure : PFigures) {
-        if (PFigure->movable) { // Don't apply physics to these objects
-            PFigure->Move(PFigures);
+void Pong::Next() { // Game loop
+    Physics::CollideInnerBounds(PFigures[1], PFigures[0]);
+    for (Figure* PFigure : PFigures) { // Add velocity
+        if (PFigure->movable) {
+            PFigure->Move(PFigure->pos.x + PFigure->vel.x, PFigure->pos.y + PFigure->vel.y);
         }
     }
 }
