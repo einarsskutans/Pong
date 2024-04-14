@@ -9,9 +9,9 @@
 Square::Square() {
     std::cout << "\nDefault constructor called " << this;
 }
-Square::Square(int px, int py, int pvelx, int pvely, int psizex, int psizey, Color pcolor) {
+Square::Square(int px, int py, int pvelx, int pvely, int psizex, int psizey, Color pcolor, bool pmovable) {
     std::cout << "\nConstructor called " << this;
-    pos.x = px, pos.y = py, vel.x = pvelx, vel.y = pvely, size.x = psizex, size.y = psizey, color = pcolor;
+    pos.x = px, pos.y = py, vel.x = pvelx, vel.y = pvely, size.x = psizex, size.y = psizey, color = pcolor, movable = pmovable;
 }
 Square::~Square() {
     std::cout << "\nDestructor called " << this;

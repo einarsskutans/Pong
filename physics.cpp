@@ -11,7 +11,7 @@ void Physics::CollideBounds(Figure* figure) {
         figure->vel.x = -figure->vel.x;
     }
 }
-void Physics::InnerBounds(Figure* figure1, Figure* figure2) { // Bounds from inside another shape
+void Physics::CollideInnerBounds(Figure* figure1, Figure* figure2) { // Bounds from inside another shape
     if (figure1->pos.y > (figure2->pos.y+figure2->size.y/2) - figure1->size.y/2 || figure1->pos.y < (figure2->pos.y-figure2->size.y/2) + figure1->size.y/2) {
         figure1->vel.y = -figure1->vel.y;
     }

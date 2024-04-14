@@ -9,6 +9,7 @@ class Figure {
     public:
         void Move(std::vector <Figure*> PFigures);
         virtual void Draw() = 0;
+        bool movable;
         Center pos, vel, size;
         Color color;
 };
