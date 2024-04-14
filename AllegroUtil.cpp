@@ -122,4 +122,3 @@ void ExitAllegro()
 {
     alExit = true;
 }
-

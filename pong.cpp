@@ -19,10 +19,8 @@ Pong::Pong() {
     Square *playingArea = new Square(SCREEN_W/2, SCREEN_H/2, 0, 0, SCREEN_W - SCREEN_W/8, SCREEN_H - SCREEN_H/8, blueBorder, false);
     Square *racketLeft = new Square(playingArea->pos.x - playingArea->size.x/2 - 10, playingArea->pos.y, 0, 0, 20, playingArea->size.y/4, white, false);
     Square *racketRight = new Square(playingArea->pos.x + playingArea->size.x/2 + 10, playingArea->pos.y, 0, 0, 20, playingArea->size.y/4, white, false);
-    Add(playingArea);
-    Add(ball);
-    Add(racketLeft);
-    Add(racketRight);
+    PFigures = {playingArea, ball, racketLeft, racketRight}; // Removed a bunch of Add() to reduce lines
+    
 }
 Pong::~Pong() {
     std::cout << "\nDestructor called " << this;
@@ -31,7 +29,9 @@ Pong::~Pong() {
 }
 
 void Pong::Next() { // Game loop
+
     Physics::CollideInnerBounds(PFigures[1], PFigures[0]);
+
     for (Figure* PFigure : PFigures) { // Add velocity
         if (PFigure->movable) {
             PFigure->Move(PFigure->pos.x + PFigure->vel.x, PFigure->pos.y + PFigure->vel.y);
