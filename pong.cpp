@@ -17,7 +17,7 @@ Pong::Pong() {
 
     Circle *ball = new Circle(SCREEN_W/2, SCREEN_H/2, 5, 5, 25, 25, black, true);
     Square *playingArea = new Square(SCREEN_W/2, SCREEN_H/2, 0, 0, SCREEN_W - SCREEN_W/8, SCREEN_H - SCREEN_H/8, blueBorder, false);
-    Square *racketLeft = new Square(playingArea->pos.x - playingArea->size.x/2 - 10, playingArea->pos.y, 0, 0, 20, playingArea->size.y/4, white, false);
+    Square *racketLeft = new Square(playingArea->pos.x - playingArea->size.x/2 - 10, playingArea->pos.y, 0, 25, 20, playingArea->size.y/4, white, false);
     Square *racketRight = new Square(playingArea->pos.x + playingArea->size.x/2 + 10, playingArea->pos.y, 0, 0, 20, playingArea->size.y/4, white, false);
     PFigures = {playingArea, ball, racketLeft, racketRight}; // Removed a bunch of Add() to reduce lines
     
@@ -29,8 +29,16 @@ Pong::~Pong() {
 }
 
 void Pong::Next() { // Game loop
-
     Physics::CollideInnerBounds(PFigures[1], PFigures[0]);
+
+    // Left racket PFigures[2], has no collision checks it's purely deco
+    if ( // Racket's pos.y is attached directly to ball's pos.y, horrendous algorithm
+        PFigures[1]->pos.y < PFigures[0]->pos.y+PFigures[0]->size.y/2 - PFigures[2]->size.y/2 && 
+        PFigures[1]->pos.y > PFigures[0]->pos.y-PFigures[0]->size.y/2 + PFigures[2]->size.y/2
+        ) {
+        PFigures[2]->pos.y = PFigures[1]->pos.y;
+    }
+    //
 
     for (Figure* PFigure : PFigures) { // Add velocity
         if (PFigure->movable) {
