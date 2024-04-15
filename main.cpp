@@ -11,13 +11,14 @@
 #include "include/pong.h"
 using namespace std;
 
-Pong* pong = new Pong();
+Pong* Pong::instance = nullptr;
+Pong& pong = Pong::GetInstance();
 
 void fps() {
-    pong->Next();
+    pong.Next();
 }
 void draw() {
-    pong->Draw();
+    pong.Draw();
 }
 
 int main(int argc, char **argv) {
@@ -30,6 +31,5 @@ int main(int argc, char **argv) {
     RunAllegro(&fps, &draw);
     DestroyAllegro();
 
-    delete pong;
     return 0;
 }

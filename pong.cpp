@@ -10,14 +10,24 @@
 #include "include/square.h"
 #include "include/physics.h"
 
+Pong& Pong::GetInstance() {
+    if (!instance) {
+        instance = new Pong();
+    }
+    if (instance) {
+        std::cout << "\nalready exists";
+    }
+    return *instance;
+}
+
 Pong::Pong() {
     std::cout << "\nDefault constructor called " << this;
 
     Color white(255, 255, 255), blueBorder(71, 147, 175), black(0, 0, 0); // Declare some colors
 
-    Circle *ball = new Circle(SCREEN_W/2, SCREEN_H/2, 5, 5, 25, 25, black, true);
+    Circle *ball = new Circle(SCREEN_W/2, SCREEN_H/2, 10, 5, 25, 25, black, true);
     Square *playingArea = new Square(SCREEN_W/2, SCREEN_H/2, 0, 0, SCREEN_W - SCREEN_W/8, SCREEN_H - SCREEN_H/8, blueBorder, false);
-    Square *racketLeft = new Square(playingArea->pos.x - playingArea->size.x/2 - 10, playingArea->pos.y, 0, 25, 20, playingArea->size.y/4, white, false);
+    Square *racketLeft = new Square(playingArea->pos.x - playingArea->size.x/2 - 10, playingArea->pos.y, 0, 0, 20, playingArea->size.y/4, white, false);
     Square *racketRight = new Square(playingArea->pos.x + playingArea->size.x/2 + 10, playingArea->pos.y, 0, 0, 20, playingArea->size.y/4, white, false);
     PFigures = {playingArea, ball, racketLeft, racketRight}; // Removed a bunch of Add() to reduce lines
     
