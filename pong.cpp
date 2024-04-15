@@ -10,12 +10,10 @@
 #include "include/square.h"
 #include "include/physics.h"
 
-Pong& Pong::GetInstance() {
+Pong& Pong::GetInstance() { // Singleton
     if (!instance) {
         instance = new Pong();
-    }
-    if (instance) {
-        std::cout << "\nalready exists";
+        std::cout << "\nNew instance called " << instance;
     }
     return *instance;
 }
