@@ -18,7 +18,7 @@ class Pong {
     private:
         Pong();
         ~Pong();
-        static Pong* instance;
+        
 };
 
 #endif

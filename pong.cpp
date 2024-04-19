@@ -10,12 +10,9 @@
 #include "include/physics.h"
 
 Pong& Pong::GetInstance() { // Singleton
-    if (!instance) {
-        instance = new Pong();
-        std::cout << "\nNew instance called " << instance;
-    }
-    std::cout << instance;
-    return *instance;
+    static Pong instance;
+
+    return instance;
 }
 
 Pong::Pong() {

@@ -13,7 +13,6 @@ using namespace std;
 
 class AllegroApp : public AllegroBase {
     public:
-    
         void Fps() {
             Pong::GetInstance().Next();
         }
@@ -24,9 +23,10 @@ class AllegroApp : public AllegroBase {
 
 
 
+
+
 int main(int argc, char **argv) {
     srand( time(0) );
-    Pong* Pong::instance = nullptr;
     AllegroApp app;
     if ( !app.Init( SCREEN_W, SCREEN_H, FPS ) ) {
         return 1;
