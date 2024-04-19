@@ -11,14 +11,23 @@
 #include "include/pong.h"
 using namespace std;
 
-Pong* pong = new Pong();
+class AllegroApp : AllegroBase {
+    public:
+        AllegroApp() {
+            Pong* pong = new Pong();
+        }
 
-void fps() {
-    pong.Next();
-}
-void draw() {
-    pong.Draw();
-}
+        void Fps() {
+            pong.Next();
+        }
+        void Draw() {
+            pong.Draw();
+        }
+    private:
+        Pong* pong;
+};
+
+
 
 int main(int argc, char **argv) {
     srand(time(0));
