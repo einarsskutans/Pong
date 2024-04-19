@@ -11,34 +11,24 @@
 #include "include/pong.h"
 using namespace std;
 
-class AllegroApp : AllegroBase {
+class AllegroApp : public AllegroBase {
     public:
-        AllegroApp() {
-            Pong* pong = new Pong();
-        }
-
         void Fps() {
-            pong.Next();
+            Pong::GetInstance().Next();
         }
         void Draw() {
-            pong.Draw();
+            Pong::GetInstance().Draw();
         }
-    private:
-        Pong* pong;
 };
 
 
 
 int main(int argc, char **argv) {
-    srand(time(0));
-    if(!pong.Init(SCREEN_W, SCREEN_H, FPS)) {
-        DestroyAllegro();
+    srand( time(0) );
+    AllegroApp app;
+    if ( !app.Init( SCREEN_W, SCREEN_H, FPS ) ) {
         return 1;
     }
-    al_set_window_title(alDisplay, "Pong");
-    RunAllegro(&fps, &draw);
-    AllegroBase::Run();
-    DestroyAllegro();
-
+    app.Run();
     return 0;
 }

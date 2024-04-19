@@ -7,9 +7,7 @@
 #include "circle.h"
 #include "figure.h"
 
-const int SCREEN_W = 1080, SCREEN_H = 720, FPS = 60;
-
-class Pong : AllegroBase {
+class Pong {
     public:
         static Pong& GetInstance();
         void Next();
