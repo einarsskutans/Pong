@@ -1,6 +1,5 @@
 #include <algorithm>
 #include <iostream>
-#include "include/AllegroBase.hpp"
 #include <windows.h>
 #include <cstdlib>
 #include <cstdio>
@@ -17,6 +16,7 @@ Pong& Pong::GetInstance() { // Singleton
     }
     return *instance;
 }
+
 Pong::Pong() {
     std::cout << "\nDefault constructor called " << this;
 
@@ -45,7 +45,7 @@ void Pong::Next() { // Game loop
         ) {
         PFigures[2]->pos.y = PFigures[1]->pos.y;
     }
-    //
+
 
     for (Figure* PFigure : PFigures) { // Add velocity
         if (PFigure->movable) {
