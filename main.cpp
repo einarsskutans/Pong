@@ -1,5 +1,5 @@
 #include <iostream>
-#include "include/AllegroUtil.hpp"
+#include "include/AllegroBase.hpp"
 #include <windows.h>
 #include <cstdlib>
 #include <cstdio>
@@ -11,25 +11,30 @@
 #include "include/pong.h"
 using namespace std;
 
-Pong* Pong::instance = nullptr;
-Pong& pong = Pong::GetInstance();
+class AllegroApp : public AllegroBase {
+    public:
+        void Fps() {
+            Pong::GetInstance().Next();
 
-void fps() {
-    pong.Next();
-}
-void draw() {
-    pong.Draw();
-}
+            Pong::GetInstance().PFigures[3]->vel.y = 0;
+            if (IsPressed(ALLEGRO_KEY_DOWN)) {
+                Pong::GetInstance().PFigures[3]->vel.y = 10;
+            }
+            if (IsPressed(ALLEGRO_KEY_UP)) {
+                Pong::GetInstance().PFigures[3]->vel.y = -10;
+            }
+        }
+        void Draw() {
+            Pong::GetInstance().Draw();
+        }
+};
 
 int main(int argc, char **argv) {
-    srand(time(0));
-    if(!InitAllegro(SCREEN_W, SCREEN_H, FPS)) {
-        DestroyAllegro();
+    srand( time(0) );
+    AllegroApp app;
+    if ( !app.Init( SCREEN_W, SCREEN_H, FPS ) ) {
         return 1;
     }
-    al_set_window_title(alDisplay, "Pong");
-    RunAllegro(&fps, &draw);
-    DestroyAllegro();
-
+    app.Run();
     return 0;
 }
