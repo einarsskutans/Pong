@@ -10,7 +10,13 @@
 #include "include/square.h"
 #include "include/physics.h"
 
-
+Pong& Pong::GetInstance() { // Singleton
+    if (!instance) {
+        instance = new Pong();
+        std::cout << "\nNew instance called " << instance;
+    }
+    return *instance;
+}
 Pong::Pong() {
     std::cout << "\nDefault constructor called " << this;
 
