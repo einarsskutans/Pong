@@ -15,6 +15,14 @@ class AllegroApp : public AllegroBase {
     public:
         void Fps() {
             Pong::GetInstance().Next();
+
+            Pong::GetInstance().PFigures[3]->vel.y = 0;
+            if (IsPressed(ALLEGRO_KEY_DOWN)) {
+                Pong::GetInstance().PFigures[3]->vel.y = 10;
+            }
+            if (IsPressed(ALLEGRO_KEY_UP)) {
+                Pong::GetInstance().PFigures[3]->vel.y = -10;
+            }
         }
         void Draw() {
             Pong::GetInstance().Draw();
