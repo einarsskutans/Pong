@@ -1,6 +1,6 @@
 #include <algorithm>
 #include <iostream>
-#include "include/AllegroUtil.hpp"
+#include "include/AllegroBase.hpp"
 #include <windows.h>
 #include <cstdlib>
 #include <cstdio>
@@ -9,14 +9,6 @@
 #include "include/circle.h"
 #include "include/square.h"
 #include "include/physics.h"
-
-Pong& Pong::GetInstance() { // Singleton
-    if (!instance) {
-        instance = new Pong();
-        std::cout << "\nNew instance called " << instance;
-    }
-    return *instance;
-}
 
 Pong::Pong() {
     std::cout << "\nDefault constructor called " << this;
