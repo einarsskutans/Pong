@@ -13,6 +13,7 @@ using namespace std;
 
 class AllegroApp : public AllegroBase {
     public:
+    
         void Fps() {
            // Pong::GetInstance().Next();
         }
