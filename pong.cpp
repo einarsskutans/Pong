@@ -10,6 +10,7 @@
 #include "include/square.h"
 #include "include/physics.h"
 
+
 Pong::Pong() {
     std::cout << "\nDefault constructor called " << this;
 

@@ -11,6 +11,7 @@ const int SCREEN_W = 1080, SCREEN_H = 720, FPS = 60;
 
 class Pong : AllegroBase {
     public:
+        static Pong& GetInstance();
         void Next();
         void Draw();
         void Add(Figure* PFigure);
