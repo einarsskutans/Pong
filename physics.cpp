@@ -19,3 +19,14 @@ void Physics::CollideInnerBounds(Figure* figure1, Figure* figure2) { // Bounds f
         figure1->vel.x = -figure1->vel.x;
     }
 }
+bool Physics::CollideCheck(Figure* figure1, Figure* figure2) {
+    if (
+        figure1->pos.x + figure1->size.x/2 >= figure2->pos.x - figure2->size.x/2 &&
+        figure1->pos.x - figure1->size.x/2 <= figure2->pos.x + figure2->size.x/2 &&
+        figure1->pos.y + figure1->size.y/2 >= figure2->pos.y - figure2->size.y/2 &&
+        figure1->pos.y - figure1->size.y/2 <= figure2->pos.y + figure2->size.y/2
+    ) {
+        return true;
+    }
+    return false;
+}
