@@ -14,10 +14,10 @@ using namespace std;
 class AllegroApp : public AllegroBase {
     public:
         void Fps() {
-            Pong::GetInstance().Next();
+           // Pong::GetInstance().Next();
         }
         void Draw() {
-            Pong::GetInstance().Draw();
+            //Pong::GetInstance().Draw();
         }
 };
 
