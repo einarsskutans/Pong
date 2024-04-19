@@ -33,7 +33,7 @@ Pong::~Pong() {
 
     std::for_each(PFigures.cbegin(), PFigures.cend(), [](Figure* PFigure){delete PFigure;});
 }
-
+int startingTicks = 0;
 void Pong::Next() { // Game loop
     Physics::CollideInnerBounds(PFigures[1], PFigures[0]);
 
@@ -55,11 +55,14 @@ void Pong::Next() { // Game loop
     }
     std::cout << Physics::CollideCheck(PFigures[1], PFigures[3]);
 
-    for (Figure* PFigure : PFigures) { // Add velocity
-        if (PFigure->movable) {
-            PFigure->Move(PFigure->pos.x + PFigure->vel.x, PFigure->pos.y + PFigure->vel.y);
+    if (startingTicks > FPS * 3) {
+        for (Figure* PFigure : PFigures) { // Add velocity
+            if (PFigure->movable) {
+                PFigure->Move(PFigure->pos.x + PFigure->vel.x, PFigure->pos.y + PFigure->vel.y);
+            }
         }
     }
+    startingTicks++;
 }
 void Pong::Draw() {
     al_clear_to_color(al_map_rgb(0, 0, 0));
