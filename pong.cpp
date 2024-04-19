@@ -14,11 +14,12 @@ Pong& Pong::GetInstance() { // Singleton
         instance = new Pong();
         std::cout << "\nNew instance called " << instance;
     }
+    std::cout << instance;
     return *instance;
 }
 
 Pong::Pong() {
-    std::cout << "\nDefault constructor called " << this;
+    std::cout << "\nDefault constructor called Pong " << this;
 
     Color white(255, 255, 255), blueBorder(71, 147, 175), black(0, 0, 0); // Declare some colors
 

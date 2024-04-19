@@ -14,6 +14,7 @@ class Pong {
         void Draw();
         void Add(Figure* PFigure);
         std::vector<Figure*> PFigures;
+
     private:
         Pong();
         ~Pong();

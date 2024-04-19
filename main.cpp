@@ -15,10 +15,10 @@ class AllegroApp : public AllegroBase {
     public:
     
         void Fps() {
-           // Pong::GetInstance().Next();
+            Pong::GetInstance().Next();
         }
         void Draw() {
-            //Pong::GetInstance().Draw();
+            Pong::GetInstance().Draw();
         }
 };
 
@@ -26,6 +26,7 @@ class AllegroApp : public AllegroBase {
 
 int main(int argc, char **argv) {
     srand( time(0) );
+    Pong* Pong::instance = nullptr;
     AllegroApp app;
     if ( !app.Init( SCREEN_W, SCREEN_H, FPS ) ) {
         return 1;
