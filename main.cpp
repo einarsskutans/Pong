@@ -21,10 +21,6 @@ class AllegroApp : public AllegroBase {
         }
 };
 
-
-
-
-
 int main(int argc, char **argv) {
     srand( time(0) );
     AllegroApp app;
