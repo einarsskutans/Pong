@@ -46,7 +46,7 @@ void Pong::Next() { // Game loop
         ) {
         PFigures[2]->pos.y = PFigures[1]->pos.y;
     }
-    //
+
 
     for (Figure* PFigure : PFigures) { // Add velocity
         if (PFigure->movable) {

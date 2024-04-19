@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "include/AllegroUtil.hpp"
+#include "include/pong.h"
 
 using namespace std;
 
@@ -34,6 +35,7 @@ bool InitAllegro( int screenWidth, int screenHeight, int fps )
         cout << "failed to create display!" << endl;
         return false;
     }
+    al_install_keyboard();
 
     if ( !al_init_primitives_addon() )
     {
@@ -47,7 +49,7 @@ bool InitAllegro( int screenWidth, int screenHeight, int fps )
         cout << "failed to create event queue!" << endl;
         return false;
     }
-
+    al_register_event_source( alEventQueue, al_get_keyboard_event_source());
     al_register_event_source( alEventQueue, al_get_display_event_source( alDisplay ) );
     al_register_event_source( alEventQueue, al_get_timer_event_source( alTimer ) );
 
@@ -81,12 +83,20 @@ void RunAllegro( FpsCallback fpsCallback, DrawCallback drawCallback )
     al_flip_display();
 
     al_start_timer( alTimer );
-
+  
     bool redraw = false;
     while( true )
     {
+        ALLEGRO_KEYBOARD_STATE keyState;
         ALLEGRO_EVENT ev;
         al_wait_for_event( alEventQueue, &ev );
+
+        al_get_keyboard_state(&keyState);
+
+        if (al_key_down(&keyState, ALLEGRO_KEY_RIGHT)) {
+            std::cout << " KEYDOWN ";
+        }
+
 
         if( ev.type == ALLEGRO_EVENT_TIMER )
         {
