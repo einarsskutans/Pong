@@ -17,7 +17,7 @@ Pong& Pong::GetInstance() { // Singleton
 }
 
 Pong::Pong() {
-    std::cout << "\nDefault constructor called Pong " << this;
+    std::cout << "\nDefault constructor called PONG " << this;
 
     Color white(255, 255, 255), blueBorder(71, 147, 175), black(0, 0, 0), gray(96, 96, 96); // Declare some colors
     Colors = {white, blueBorder, black, gray};
@@ -30,7 +30,7 @@ Pong::Pong() {
     PFigures = {playingArea, ball, racketLeft, racketRight}; // Removed a bunch of Add() to reduce lines
 }
 Pong::~Pong() {
-    std::cout << "\nDestructor called " << this;
+    std::cout << "\nDestructor called PONG " << this;
 
     std::for_each(PFigures.cbegin(), PFigures.cend(), [](Figure* PFigure){delete PFigure;});
 }
