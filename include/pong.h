@@ -12,10 +12,10 @@ class Pong {
         static Pong& GetInstance();
         void Next();
         void Draw();
-        void Add(Figure* PFigure);
-        std::vector<Figure*> PFigures;
+        void Add(Figure* Figure);
+        std::vector<Figure*> Figures;
         std::vector<Color> Colors;
-        enum Figures {
+        enum FiguresIDs {
             playingArea,
             ball,
             racketLeft,

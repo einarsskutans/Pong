@@ -27,41 +27,41 @@ Pong::Pong() {
     Square *racketLeft = new Square(playingArea->pos.x - playingArea->size.x/2 - 10, playingArea->pos.y, 0, 0, 20, playingArea->size.y/4, white, true);
     Square *racketRight = new Square(playingArea->pos.x + playingArea->size.x/2 + 10, playingArea->pos.y, 0, 0, 20, playingArea->size.y/4, white, true);
 
-    PFigures = {playingArea, ball, racketLeft, racketRight}; // Removed a bunch of Add() to reduce lines
+    Figures = {playingArea, ball, racketLeft, racketRight}; // Removed a bunch of Add() to reduce lines
 }
 Pong::~Pong() {
     std::cout << "\nDestructor called PONG " << this;
 
-    std::for_each(PFigures.cbegin(), PFigures.cend(), [](Figure* PFigure){delete PFigure;});
+    std::for_each(Figures.cbegin(), Figures.cend(), [](Figure* figure){delete figure;});
 }
 
 int startingTicks = 0; // Too lazy for deltaTime this works
 
 void Pong::Next() { // Game loop
 
-    Physics::CollideInnerBounds(PFigures[ball], PFigures[playingArea]);
+    Physics::CollideInnerBounds(Figures[ball], Figures[playingArea]);
 
-    // Left racket PFigures[racketLeft], has no collision checks it's purely deco
+    // Left racket has no collision checks it's purely deco
     if ( // Racket's pos.y is attached directly to ball's pos.y, horrendous algorithm
-        PFigures[racketLeft]->movable &&
-        PFigures[ball]->pos.y < PFigures[playingArea]->pos.y+PFigures[playingArea]->size.y/2 - PFigures[racketLeft]->size.y/2 && 
-        PFigures[ball]->pos.y > PFigures[playingArea]->pos.y-PFigures[playingArea]->size.y/2 + PFigures[racketLeft]->size.y/2
+        Figures[racketLeft]->movable &&
+        Figures[ball]->pos.y < Figures[playingArea]->pos.y+Figures[playingArea]->size.y/2 - Figures[racketLeft]->size.y/2 && 
+        Figures[ball]->pos.y > Figures[playingArea]->pos.y-Figures[playingArea]->size.y/2 + Figures[racketLeft]->size.y/2
         ) {
-        PFigures[racketLeft]->pos.y = PFigures[ball]->pos.y;
+        Figures[racketLeft]->pos.y = Figures[ball]->pos.y;
     }
 
     if (
-        PFigures[ball]->pos.x + PFigures[ball]->size.x/2 >= PFigures[playingArea]->pos.x + PFigures[playingArea]->size.x/2 &&
-        !Physics::CollideCheck(PFigures[ball], PFigures[racketRight])
+        Figures[ball]->pos.x + Figures[ball]->size.x/2 >= Figures[playingArea]->pos.x + Figures[playingArea]->size.x/2 &&
+        !Physics::CollideCheck(Figures[ball], Figures[racketRight])
     ) {
-        PFigures[playingArea]->color = Colors[3];
-        std::for_each(PFigures.cbegin(), PFigures.cend(), [](Figure* PFigure){PFigure->movable = false;});
+        Figures[playingArea]->color = Colors[3];
+        std::for_each(Figures.cbegin(), Figures.cend(), [](Figure* figure){figure->movable = false;});
     }
 
     if (startingTicks > 60 * 2) {
-        for (Figure* PFigure : PFigures) { // Add velocity
-            if (PFigure->movable) {
-                PFigure->Move(PFigure->pos.x + PFigure->vel.x, PFigure->pos.y + PFigure->vel.y);
+        for (Figure* figure : Figures) { // Add velocity
+            if (figure->movable) {
+                figure->Move(figure->pos.x + figure->vel.x, figure->pos.y + figure->vel.y);
             }
         }
     }
@@ -70,8 +70,8 @@ void Pong::Next() { // Game loop
 void Pong::Draw() {
     al_clear_to_color(al_map_rgb(0, 0, 0));
 
-    std::for_each(PFigures.cbegin(), PFigures.cend(), [](Figure* PFigure){PFigure->Draw();});
+    std::for_each(Figures.cbegin(), Figures.cend(), [](Figure* figure){figure->Draw();});
 }
-void Pong::Add(Figure* PFigure) {
-    PFigures.push_back(PFigure);
+void Pong::Add(Figure* figure) {
+    Figures.push_back(figure);
 }
