@@ -15,6 +15,12 @@ class Pong {
         void Add(Figure* PFigure);
         std::vector<Figure*> PFigures;
         std::vector<Color> Colors;
+        enum Figures {
+            playingArea,
+            ball,
+            racketLeft,
+            racketRight
+        };
     private:
         Pong();
         ~Pong();
