@@ -16,18 +16,18 @@ class AllegroApp : public AllegroBase {
         void Fps() {
             Pong::GetInstance().Next();
 
-            Pong::GetInstance().PFigures[3]->vel.y = 0;
+            Pong::GetInstance().PFigures[Pong::racketRight]->vel.y = 0;
             if (
                 IsPressed(ALLEGRO_KEY_DOWN) &&
-                Pong::GetInstance().PFigures[3]->pos.y + Pong::GetInstance().PFigures[3]->size.y/2 < Pong::GetInstance().PFigures[0]->pos.y + Pong::GetInstance().PFigures[0]->size.y/2
+                Pong::GetInstance().PFigures[Pong::racketRight]->pos.y + Pong::GetInstance().PFigures[Pong::racketRight]->size.y/2 < Pong::GetInstance().PFigures[Pong::playingArea]->pos.y + Pong::GetInstance().PFigures[Pong::playingArea]->size.y/2
                 ) {
-                Pong::GetInstance().PFigures[3]->vel.y = 10;
+                Pong::GetInstance().PFigures[Pong::racketRight]->vel.y = 10;
             }
             if (
                 IsPressed(ALLEGRO_KEY_UP) &&
-                Pong::GetInstance().PFigures[3]->pos.y - Pong::GetInstance().PFigures[3]->size.y/2 > Pong::GetInstance().PFigures[0]->pos.y - Pong::GetInstance().PFigures[0]->size.y/2
+                Pong::GetInstance().PFigures[Pong::racketRight]->pos.y - Pong::GetInstance().PFigures[Pong::racketRight]->size.y/2 > Pong::GetInstance().PFigures[Pong::playingArea]->pos.y - Pong::GetInstance().PFigures[Pong::playingArea]->size.y/2
                 ) {
-                Pong::GetInstance().PFigures[3]->vel.y = -10;
+                Pong::GetInstance().PFigures[Pong::racketRight]->vel.y = -10;
             }
         }
         void Draw() {

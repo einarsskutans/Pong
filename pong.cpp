@@ -39,22 +39,22 @@ int startingTicks = 0; // Too lazy for deltaTime this works
 
 void Pong::Next() { // Game loop
 
-    Physics::CollideInnerBounds(PFigures[Pong::ball], PFigures[0]);
+    Physics::CollideInnerBounds(PFigures[Pong::ball], PFigures[Pong::playingArea]);
 
-    // Left racket PFigures[2], has no collision checks it's purely deco
+    // Left racket PFigures[Pong::racketLeft], has no collision checks it's purely deco
     if ( // Racket's pos.y is attached directly to ball's pos.y, horrendous algorithm
-        PFigures[2]->movable &&
-        PFigures[1]->pos.y < PFigures[0]->pos.y+PFigures[0]->size.y/2 - PFigures[2]->size.y/2 && 
-        PFigures[1]->pos.y > PFigures[0]->pos.y-PFigures[0]->size.y/2 + PFigures[2]->size.y/2
+        PFigures[Pong::racketLeft]->movable &&
+        PFigures[Pong::ball]->pos.y < PFigures[Pong::playingArea]->pos.y+PFigures[Pong::playingArea]->size.y/2 - PFigures[Pong::racketLeft]->size.y/2 && 
+        PFigures[Pong::ball]->pos.y > PFigures[Pong::playingArea]->pos.y-PFigures[Pong::playingArea]->size.y/2 + PFigures[Pong::racketLeft]->size.y/2
         ) {
-        PFigures[2]->pos.y = PFigures[1]->pos.y;
+        PFigures[Pong::racketLeft]->pos.y = PFigures[Pong::ball]->pos.y;
     }
 
     if (
-        PFigures[1]->pos.x + PFigures[1]->size.x/2 >= PFigures[0]->pos.x + PFigures[0]->size.x/2 &&
-        !Physics::CollideCheck(PFigures[1], PFigures[3])
+        PFigures[Pong::ball]->pos.x + PFigures[Pong::ball]->size.x/2 >= PFigures[Pong::playingArea]->pos.x + PFigures[Pong::playingArea]->size.x/2 &&
+        !Physics::CollideCheck(PFigures[Pong::ball], PFigures[Pong::racketRight])
     ) {
-        PFigures[0]->color = Colors[3];
+        PFigures[Pong::playingArea]->color = Colors[3];
         std::for_each(PFigures.cbegin(), PFigures.cend(), [](Figure* PFigure){PFigure->movable = false;});
     }
 
