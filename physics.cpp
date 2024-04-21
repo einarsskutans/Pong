@@ -30,3 +30,13 @@ bool Physics::CollideCheck(Figure* figure1, Figure* figure2) {
     }
     return false;
 }
+
+void Physics::RacketFollowBall(Figure* figure1, Figure* figure2, Figure* figure3) {
+    if ( // Racket's pos.y is attached directly to ball's pos.y, horrendous algorithm
+        figure1->movable &&
+        figure2->pos.y < figure3->pos.y+figure3->size.y/2 - figure1->size.y/2 && 
+        figure2->pos.y > figure3->pos.y-figure3->size.y/2 + figure1->size.y/2
+    ) {
+        figure1->pos.y = figure2->pos.y;
+}
+}

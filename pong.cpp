@@ -21,12 +21,10 @@ Pong::Pong() {
 
     Color white(255, 255, 255), blueBorder(71, 147, 175), black(0, 0, 0), gray(96, 96, 96); // Declare some colors
     Colors = {white, blueBorder, black, gray};
-
     Circle *ball = new Circle(SCREEN_W/2, SCREEN_H/2, 10, 5, 25, 25, black, true);
     Square *playingArea = new Square(SCREEN_W/2, SCREEN_H/2, 0, 0, SCREEN_W - SCREEN_W/8, SCREEN_H - SCREEN_H/8, blueBorder, false);
     Square *racketLeft = new Square(playingArea->pos.x - playingArea->size.x/2 - 10, playingArea->pos.y, 0, 0, 20, playingArea->size.y/4, white, true);
     Square *racketRight = new Square(playingArea->pos.x + playingArea->size.x/2 + 10, playingArea->pos.y, 0, 0, 20, playingArea->size.y/4, white, true);
-
     Figures = {playingArea, ball, racketLeft, racketRight}; // Removed a bunch of Add() to reduce lines
 }
 Pong::~Pong() {
@@ -38,18 +36,10 @@ Pong::~Pong() {
 int startingTicks = 0; // Too lazy for deltaTime this works
 
 void Pong::Next() { // Game loop
-
     Physics::CollideInnerBounds(Figures[ball], Figures[playingArea]);
+    Physics::RacketFollowBall(Figures[racketLeft], Figures[ball], Figures[playingArea]); // Left racket has no collision checks it's purely deco
 
-    // Left racket has no collision checks it's purely deco
-    if ( // Racket's pos.y is attached directly to ball's pos.y, horrendous algorithm
-        Figures[racketLeft]->movable &&
-        Figures[ball]->pos.y < Figures[playingArea]->pos.y+Figures[playingArea]->size.y/2 - Figures[racketLeft]->size.y/2 && 
-        Figures[ball]->pos.y > Figures[playingArea]->pos.y-Figures[playingArea]->size.y/2 + Figures[racketLeft]->size.y/2
-        ) {
-        Figures[racketLeft]->pos.y = Figures[ball]->pos.y;
-    }
-
+    // Lose game condition
     if (
         Figures[ball]->pos.x + Figures[ball]->size.x/2 >= Figures[playingArea]->pos.x + Figures[playingArea]->size.x/2 &&
         !Physics::CollideCheck(Figures[ball], Figures[racketRight])
@@ -58,6 +48,7 @@ void Pong::Next() { // Game loop
         std::for_each(Figures.cbegin(), Figures.cend(), [](Figure* figure){figure->movable = false;});
     }
 
+    // Move all figures
     if (startingTicks > 60 * 2) {
         for (Figure* figure : Figures) { // Add velocity
             if (figure->movable) {

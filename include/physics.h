@@ -9,6 +9,8 @@ class Physics {
         void static CollideBounds(Figure* figure);
         void static CollideInnerBounds(Figure* figure1, Figure* figure2);
         bool static CollideCheck(Figure* figure1, Figure* figure2);
+
+        void static RacketFollowBall(Figure* figure1, Figure* figure2, Figure* figure3);
 };
 
 #endif
