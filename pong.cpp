@@ -12,7 +12,6 @@
 
 Pong& Pong::GetInstance() { // Singleton
     static Pong instance;
-
     return instance;
 }
 
@@ -37,7 +36,7 @@ int startingTicks = 0; // Too lazy for deltaTime this works
 
 void Pong::Next() { // Game loop
     Physics::CollideInnerBounds(Figures[ball], Figures[playingArea]);
-    Physics::RacketFollowBall(Figures[racketLeft], Figures[ball], Figures[playingArea]); // Left racket has no collision checks it's purely deco
+    Physics::RacketFollowBall(Figures[racketLeft], Figures[ball], Figures[playingArea]); // Left racket has no collision checks, it's purely deco
 
     // Lose game condition
     if (
