@@ -19,7 +19,8 @@ class Pong {
             playingArea,
             ball,
             racketLeft,
-            racketRight
+            racketRight,
+            img
         };
     private:
         Pong();

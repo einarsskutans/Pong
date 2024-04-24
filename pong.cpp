@@ -9,6 +9,7 @@
 #include "include/circle.h"
 #include "include/square.h"
 #include "include/physics.h"
+#include "include/image.h"
 
 Pong& Pong::GetInstance() { // Singleton
     static Pong instance;
@@ -24,7 +25,10 @@ Pong::Pong() {
     Square *playingArea = new Square(SCREEN_W/2, SCREEN_H/2, 0, 0, SCREEN_W - SCREEN_W/8, SCREEN_H - SCREEN_H/8, blueBorder, false);
     Square *racketLeft = new Square(playingArea->pos.x - playingArea->size.x/2 - 10, playingArea->pos.y, 0, 0, 20, playingArea->size.y/4, white, true);
     Square *racketRight = new Square(playingArea->pos.x + playingArea->size.x/2 + 10, playingArea->pos.y, 0, 0, 20, playingArea->size.y/4, white, true);
-    Figures = {playingArea, ball, racketLeft, racketRight}; // Removed a bunch of Add() to reduce lines
+
+    ALLEGRO_BITMAP *bitmap = al_load_bitmap("heart.png");
+    Image *img = new Image(200, 200, 0, 0, 20, 20, black, false, bitmap);
+    Figures = {playingArea, ball, racketLeft, racketRight, img}; // Removed a bunch of Add() to reduce lines
 }
 Pong::~Pong() {
     std::cout << "\nDestructor called PONG " << this;
