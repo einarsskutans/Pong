@@ -18,5 +18,4 @@ Image::~Image() {
     std::cout << "\nDestructor called Image " << this;
 }
 void Image::Draw() {
-    al_draw_bitmap(bitmap, pos.x, pos.y, 0);
 }

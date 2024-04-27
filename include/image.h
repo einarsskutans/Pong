@@ -10,8 +10,6 @@ class Image : public Figure {
         Image(int px, int py, int pvelx, int pvely, int psizex, int psizey, Color pcolor, bool pmovabale);
         ~Image();
         void Draw();
-
-        ALLEGRO_BITMAP *bitmap = al_load_bitmap("heart.png");
 };
 
 #endif

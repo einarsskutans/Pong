@@ -10,6 +10,7 @@
 #include "include/square.h"
 #include "include/physics.h"
 #include "include/image.h"
+#include "include/AllegroBase.hpp"
 
 Pong& Pong::GetInstance() { // Singleton
     static Pong instance;
@@ -26,8 +27,8 @@ Pong::Pong() {
     Square *racketLeft = new Square(playingArea->pos.x - playingArea->size.x/2 - 10, playingArea->pos.y, 0, 0, 20, playingArea->size.y/4, white, true);
     Square *racketRight = new Square(playingArea->pos.x + playingArea->size.x/2 + 10, playingArea->pos.y, 0, 0, 20, playingArea->size.y/4, white, true);
 
-    Image *img = new Image(200, 200, 0, 0, 20, 20, black, false);
-    Figures = {playingArea, ball, racketLeft, racketRight, img}; // Removed a bunch of Add() to reduce lines
+    //Image *img = new Image(200, 200, 0, 0, 20, 20, black, false);
+    Figures = {playingArea, ball, racketLeft, racketRight}; // Removed a bunch of Add() to reduce lines
 }
 Pong::~Pong() {
     std::cout << "\nDestructor called PONG " << this;
@@ -62,7 +63,6 @@ void Pong::Next() { // Game loop
 }
 void Pong::Draw() {
     al_clear_to_color(al_map_rgb(0, 0, 0));
-
     std::for_each(Figures.cbegin(), Figures.cend(), [](Figure* figure){figure->Draw();});
 }
 void Pong::Add(Figure* figure) {
