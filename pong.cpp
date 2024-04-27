@@ -15,15 +15,15 @@ Pong& Pong::GetInstance() { // Singleton
 Pong::Pong() {
     std::cout << "\nDefault constructor called PONG " << this;
 
-    Color white(255, 255, 255), blueBorder(71, 147, 175), black(0, 0, 0), gray(96, 96, 96); // Declare some colors
+    Color white(255, 255, 255), blueBorder(71, 147, 175), black(0, 0, 0), gray(96, 96, 96), red(255, 0, 0); // Declare some colors
     Colors = {white, blueBorder, black, gray};
     Circle *ball = new Circle(SCREEN_W/2, SCREEN_H/2, 10, 5, 25, 25, black, true);
     Square *playingArea = new Square(SCREEN_W/2, SCREEN_H/2, 0, 0, SCREEN_W - SCREEN_W/8, SCREEN_H - SCREEN_H/8, blueBorder, false);
     Square *racketLeft = new Square(playingArea->pos.x - playingArea->size.x/2 - 10, playingArea->pos.y, 0, 0, 20, playingArea->size.y/4, white, true);
     Square *racketRight = new Square(playingArea->pos.x + playingArea->size.x/2 + 10, playingArea->pos.y, 0, 0, 20, playingArea->size.y/4, white, true);
-
-    //Image *img = new Image(200, 200, 0, 0, 20, 20, black, false);
-    Figures = {playingArea, ball, racketLeft, racketRight}; // Removed a bunch of Add() to reduce lines
+    Square *healthBarEmpty = new Square(SCREEN_W/2, SCREEN_H-(SCREEN_H-playingArea->size.y)/4, 0, 0, SCREEN_W/2, 20, gray, false);
+    Square *healthBar = new Square(SCREEN_W/2, SCREEN_H-(SCREEN_H-playingArea->size.y)/4, 0, 0, SCREEN_W/2, 20, red, false);
+    Figures = {playingArea, ball, racketLeft, racketRight, healthBarEmpty, healthBar}; // Removed a bunch of Add() to reduce lines
 }
 Pong::~Pong() {
     std::cout << "\nDestructor called PONG " << this;
@@ -42,8 +42,12 @@ void Pong::Next() { // Game loop
         Figures[ball]->pos.x + Figures[ball]->size.x/2 >= Figures[playingArea]->pos.x + Figures[playingArea]->size.x/2 &&
         !Physics::CollideCheck(Figures[ball], Figures[racketRight])
     ) {
-        Figures[playingArea]->color = Colors[3];
-        std::for_each(Figures.cbegin(), Figures.cend(), [](Figure* figure){figure->movable = false;});
+        //Figures[playingArea]->color = Colors[3];
+        //std::for_each(Figures.cbegin(), Figures.cend(), [](Figure* figure){figure->movable = false;});
+        lives--;
+        if (lives > 0) {
+            Figures[hpBar]->size.x -= Figures[hpBar]->size.x/lives; 
+        }
     }
 
     // Move all figures

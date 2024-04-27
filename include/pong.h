@@ -19,8 +19,10 @@ class Pong {
             ball,
             racketLeft,
             racketRight,
-            img
+            hpBarEmpty,
+            hpBar,
         };
+        int lives = 5;
     private:
         Pong();
         ~Pong();
