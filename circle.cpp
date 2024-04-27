@@ -1,10 +1,9 @@
 #include <iostream>
-#include "include/AllegroBase.hpp"
 #include <windows.h>
 #include <cstdlib>
 #include <cstdio>
 
-#include "include/circle.h"
+#include "include/AllegroBase.hpp"
 
 Circle::Circle() {
     std::cout << "\nDefault constructor called CIRCLE " << this;

@@ -1,7 +1,6 @@
 #ifndef IMAGE_H
 #define IMAGE_H
 
-#include "AllegroBase.hpp"
 #include "figure.h"
 
 class Image : public Figure {

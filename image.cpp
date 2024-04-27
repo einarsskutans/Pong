@@ -1,10 +1,9 @@
 #include <iostream>
-#include "include/AllegroBase.hpp"
 #include <windows.h>
 #include <cstdlib>
 #include <cstdio>
 
-#include "include/image.h"
+#include "include/AllegroBase.hpp"
 
 Image::Image() {
     std::cout << "\nDefault constructor called Image " << this;

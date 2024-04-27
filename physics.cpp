@@ -1,6 +1,4 @@
-#include "include/physics.h"
-#include "include/figure.h"
-#include "include/pong.h"
+#include "include/AllegroBase.hpp"
 
 void Physics::CollideBounds(Figure* figure) {
     

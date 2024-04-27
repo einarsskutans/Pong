@@ -5,11 +5,6 @@
 #include <cstdlib>
 #include <cstdio>
 
-#include "include/pong.h"
-#include "include/circle.h"
-#include "include/square.h"
-#include "include/physics.h"
-#include "include/image.h"
 #include "include/AllegroBase.hpp"
 
 Pong& Pong::GetInstance() { // Singleton

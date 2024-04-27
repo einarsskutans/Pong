@@ -6,6 +6,15 @@
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_image.h>
 
+#include "pong.h"
+#include "circle.h"
+#include "figure.h"
+#include "image.h"
+#include "physics.h"
+#include "pong.h"
+#include "square.h"
+#include "util.h"
+
 const int FPS = 60;
 const int SCREEN_W = 1080;
 const int SCREEN_H = 720;

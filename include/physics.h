@@ -2,7 +2,6 @@
 #define PHYSICS_H
 
 #include "figure.h"
-#include "pong.h"
 
 class Physics {
     public:

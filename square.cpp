@@ -1,10 +1,9 @@
 #include <iostream>
-#include "include/AllegroBase.hpp"
 #include <windows.h>
 #include <cstdlib>
 #include <cstdio>
 
-#include "include/square.h"
+#include "include/AllegroBase.hpp"
 
 Square::Square() {
     std::cout << "\nDefault constructor called SQUARE " << this;

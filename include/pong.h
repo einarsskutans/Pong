@@ -4,7 +4,6 @@
 #include <vector>
 
 #include "AllegroBase.hpp"
-#include "circle.h"
 #include "figure.h"
 
 class Pong {
