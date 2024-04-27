@@ -26,8 +26,7 @@ Pong::Pong() {
     Square *racketLeft = new Square(playingArea->pos.x - playingArea->size.x/2 - 10, playingArea->pos.y, 0, 0, 20, playingArea->size.y/4, white, true);
     Square *racketRight = new Square(playingArea->pos.x + playingArea->size.x/2 + 10, playingArea->pos.y, 0, 0, 20, playingArea->size.y/4, white, true);
 
-    ALLEGRO_BITMAP *bitmap = al_load_bitmap("heart.png");
-    Image *img = new Image(200, 200, 0, 0, 20, 20, black, false, bitmap);
+    Image *img = new Image(200, 200, 0, 0, 20, 20, black, false);
     Figures = {playingArea, ball, racketLeft, racketRight, img}; // Removed a bunch of Add() to reduce lines
 }
 Pong::~Pong() {
