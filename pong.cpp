@@ -44,6 +44,8 @@ void Pong::Next() { // Game loop
     ) {
         ballCollide = true;
         lives--;
+        if (lives == maxLives - 1) {Figures[racketRight]->color = Colors[2];};
+        Figures[racketRight]->color.r += 255/maxLives;
     } else if (
         !Physics::CollideCheck(Figures[ball], Figures[racketRight]) &&
         Figures[ball]->pos.x + Figures[ball]->size.x/2 < Figures[playingArea]->pos.x + Figures[playingArea]->size.x/2
