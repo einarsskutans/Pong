@@ -33,7 +33,6 @@ Pong::~Pong() {
 int startingTicks = 0; // Too lazy for deltaTime this works
 
 void Pong::Next() { // Game loop
-    auto t_start = std::chrono::high_resolution_clock::now();
     Physics::CollideInnerBounds(Figures[ball], Figures[playingArea]);
     Physics::RacketFollowBall(Figures[racketLeft], Figures[ball], Figures[playingArea]); // Left racket has no collision checks, it's purely deco
 
@@ -56,9 +55,6 @@ void Pong::Next() { // Game loop
         }
     }
     startingTicks++;
-    auto t_end = std::chrono::high_resolution_clock::now();
-    double elapsed_time_ms = std::chrono::duration<double, std::nano>(t_end-t_start).count();
-    std::cout << elapsed_time_ms << " ";
 }
 void Pong::Draw() {
     al_clear_to_color(al_map_rgb(0, 0, 0));
