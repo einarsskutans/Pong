@@ -12,16 +12,17 @@ class Pong {
         void Next();
         void Draw();
         void Add(Figure* Figure);
+
         std::vector<Figure*> Figures;
         std::vector<Color> Colors;
+        int maxLives = 5;
+        int lives = maxLives;
         enum FiguresIDs {
             playingArea,
             ball,
             racketLeft,
             racketRight,
         };
-        int lives = 5;
-        int maxLives = 5;
     private:
         Pong();
         ~Pong();
