@@ -19,10 +19,9 @@ class Pong {
             ball,
             racketLeft,
             racketRight,
-            hpBarEmpty,
-            hpBar,
         };
         int lives = 5;
+        int maxLives = 5;
     private:
         Pong();
         ~Pong();
