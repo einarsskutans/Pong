@@ -37,7 +37,6 @@ void Pong::Next() { // Game loop
     Physics::CollideInnerBounds(Figures[ball], Figures[playingArea]);
     Physics::RacketFollowBall(Figures[racketLeft], Figures[ball], Figures[playingArea]); // Left racket has no collision checks, it's purely deco
 
-
     if (
         !Physics::CollideCheck(Figures[ball], Figures[racketRight]) &&
         Figures[ball]->pos.x + Figures[ball]->size.x/2 >= Figures[playingArea]->pos.x + Figures[playingArea]->size.x/2 &&
@@ -53,21 +52,16 @@ void Pong::Next() { // Game loop
     }
 
     // Lose game condition
-    if (
-        Figures[ball]->pos.x + Figures[ball]->size.x/2 >= Figures[playingArea]->pos.x + Figures[playingArea]->size.x/2 &&
-        !Physics::CollideCheck(Figures[ball], Figures[racketRight])
-    ) {
-        //Figures[playingArea]->color = Colors[3];
-        //std::for_each(Figures.cbegin(), Figures.cend(), [](Figure* figure){figure->movable = false;});
+    if (lives < 1) {
+        Figures[playingArea]->color = Colors[3];
+        std::for_each(Figures.cbegin(), Figures.cend(), [](Figure* figure){figure->movable = false;});
     }
-    std::cout << lives;
 
     // Move all figures
     if (startingTicks > 60 * 2) {
         for (Figure* figure : Figures) { // Add velocity
             if (figure->movable) {
                 figure->Move(figure->pos.x + figure->vel.x, figure->pos.y + figure->vel.y);
-                std::cout << figure->vel.x << " ";
             }
         }
     }
