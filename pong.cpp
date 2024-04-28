@@ -31,7 +31,6 @@ Pong::~Pong() {
 }
 
 int startingTicks = 0; // Too lazy for deltaTime this works
-double elapsed_time_ms = 1;
 
 void Pong::Next() { // Game loop
     auto t_start = std::chrono::high_resolution_clock::now();
@@ -51,14 +50,14 @@ void Pong::Next() { // Game loop
     if (startingTicks > 60 * 2) {
         for (Figure* figure : Figures) { // Add velocity
             if (figure->movable) {
-                figure->Move(figure->pos.x + figure->vel.x/elapsed_time_ms, figure->pos.y + figure->vel.y/elapsed_time_ms);
+                figure->Move(figure->pos.x + figure->vel.x, figure->pos.y + figure->vel.y);
                 std::cout << figure->vel.x << " ";
             }
         }
     }
     startingTicks++;
     auto t_end = std::chrono::high_resolution_clock::now();
-    elapsed_time_ms = std::chrono::duration<double, std::milli>(t_end-t_start).count();
+    double elapsed_time_ms = std::chrono::duration<double, std::nano>(t_end-t_start).count();
     std::cout << elapsed_time_ms << " ";
 }
 void Pong::Draw() {
