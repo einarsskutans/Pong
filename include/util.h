@@ -5,9 +5,9 @@
 
 struct Center {
     Center();
-    Center(int px, int py);
+    Center(double px, double py);
     ~Center();
-    int x, y;
+    double x, y;
 };
 struct Color {
     Color();

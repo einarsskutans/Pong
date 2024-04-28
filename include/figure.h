@@ -7,7 +7,7 @@
 
 class Figure {
     public:
-        void Move(int px, int py);
+        void Move(double px, double py);
         virtual void Draw() = 0;
         bool movable;
         Center pos, vel, size;

@@ -6,7 +6,7 @@
 class Square : public Figure {
     public:
         Square();
-        Square(int px, int py, int pvelx, int pvely, int psizex, int psizey, Color pcolor, bool pmovabale);
+        Square(double px, double py, double pvelx, double pvely, double psizex, double psizey, Color pcolor, bool pmovabale);
         ~Square();
         void Draw();
 };

@@ -6,7 +6,7 @@
 Center::Center() {
     std::cout << "\nDefault constructor called CENTER " << this;
 }
-Center::Center(int px, int py) {
+Center::Center(double px, double py) {
     std::cout << "\nConstructor called CENTER" << this;
     x = px, y = py;
 }

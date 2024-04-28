@@ -4,6 +4,7 @@
 #include <windows.h>
 #include <cstdlib>
 #include <cstdio>
+#include <chrono> // For delta time purposes
 
 #include "include/AllegroBase.hpp"
 
@@ -30,10 +31,10 @@ Pong::~Pong() {
 }
 
 int startingTicks = 0; // Too lazy for deltaTime this works
-bool hit;
-int tempLoop;
+double elapsed_time_ms = 1;
 
 void Pong::Next() { // Game loop
+    auto t_start = std::chrono::high_resolution_clock::now();
     Physics::CollideInnerBounds(Figures[ball], Figures[playingArea]);
     Physics::RacketFollowBall(Figures[racketLeft], Figures[ball], Figures[playingArea]); // Left racket has no collision checks, it's purely deco
 
@@ -50,11 +51,15 @@ void Pong::Next() { // Game loop
     if (startingTicks > 60 * 2) {
         for (Figure* figure : Figures) { // Add velocity
             if (figure->movable) {
-                figure->Move(figure->pos.x + figure->vel.x, figure->pos.y + figure->vel.y);
+                figure->Move(figure->pos.x + figure->vel.x/elapsed_time_ms, figure->pos.y + figure->vel.y/elapsed_time_ms);
+                std::cout << figure->vel.x << " ";
             }
         }
     }
     startingTicks++;
+    auto t_end = std::chrono::high_resolution_clock::now();
+    elapsed_time_ms = std::chrono::duration<double, std::milli>(t_end-t_start).count();
+    std::cout << elapsed_time_ms << " ";
 }
 void Pong::Draw() {
     al_clear_to_color(al_map_rgb(0, 0, 0));

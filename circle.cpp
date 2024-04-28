@@ -8,7 +8,7 @@
 Circle::Circle() {
     std::cout << "\nDefault constructor called CIRCLE " << this;
 }
-Circle::Circle(int px, int py, int pvelx, int pvely, int psizex, int psizey, Color pcolor, bool pmovable) {
+Circle::Circle(double px, double py, double pvelx, double pvely, double psizex, double psizey, Color pcolor, bool pmovable) {
     std::cout << "\nConstructor called CIRCLE " << this;
     pos.x = px, pos.y = py, vel.x = pvelx, vel.y = pvely, size.x = psizex, size.y = psizey, color = pcolor, movable = pmovable;
 }
