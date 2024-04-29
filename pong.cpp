@@ -48,14 +48,14 @@ void Pong::Next() { // Game loop
 
     if (Physics::CollideCheck(Figures[ball], Figures[racketRight]) && !ballCollideSides)  {
         // Scoring condtitionals -> ball behavior
-        Figures[ball]->vel.x *= 1.05;
-        if (Figures[ball]->vel.x > 20) {
-            Figures[ball]->ResetVel();
+
+        if (Figures[ball]->vel.x < 20) {
+            Figures[ball]->vel.x *= 1.05;
         }
         switch (score)
         {
         case 12:
-            Figures[ball]->drawable = true; // Turn the ring visible
+            Figures[ring]->drawable = true; // Turn the ring visible
             break;
         case 24:
             Figures[ring]->color.b -= 55; Figures[ring]->color.r -= 55;
