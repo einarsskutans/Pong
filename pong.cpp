@@ -18,17 +18,18 @@ Pong::Pong() {
 
     Color white(255, 255, 255), blueBorder(71, 147, 175), black(0, 0, 0), gray(96, 96, 96), red(255, 0, 0); // Declare some colors
     Colors = {white, blueBorder, black, gray};
-    Circle *ball = new Circle(SCREEN_W/2, SCREEN_H/2, 10, 5, 25, 25, black, true);
+    Circle *ball = new Circle(SCREEN_W/2, SCREEN_H/2, 10, 5, 25, 25, black, true, true);
+    Ring *ring = new Ring(0, 0, 0, 0, 50, 50, 2, gray, blueBorder, true, false);
     ball->SetDefaultVel(Center(10, 5));
-    Square *playingArea = new Square(SCREEN_W/2, SCREEN_H/2, 0, 0, SCREEN_W - SCREEN_W/8, SCREEN_H - SCREEN_H/8, blueBorder, false);
-    Square *racketLeft = new Square(playingArea->pos.x - playingArea->size.x/2 - 10, playingArea->pos.y, 0, 0, 20, playingArea->size.y/4, white, true);
-    Square *racketRight = new Square(playingArea->pos.x + playingArea->size.x/2 + 10, playingArea->pos.y, 0, 0, 20, playingArea->size.y/4, white, true);
-    Figures = {playingArea, ball, racketLeft, racketRight}; // Removed a bunch of Add() to reduce lines
+    Square *playingArea = new Square(SCREEN_W/2, SCREEN_H/2, 0, 0, SCREEN_W - SCREEN_W/8, SCREEN_H - SCREEN_H/8, blueBorder, false, true);
+    Square *racketLeft = new Square(playingArea->pos.x - playingArea->size.x/2 - 10, playingArea->pos.y, 0, 0, 20, playingArea->size.y/4, white, true, true);
+    Square *racketRight = new Square(playingArea->pos.x + playingArea->size.x/2 + 10, playingArea->pos.y, 0, 0, 20, playingArea->size.y/4, white, true, true);
+    Figures = {playingArea, ring, ball, racketLeft, racketRight}; // Removed a bunch of Add() to reduce lines
 
     blackBorderSize = Center((SCREEN_W-playingArea->size.x)/2, (SCREEN_H-playingArea->size.y)/2);
 
     for (int i = 0; i < maxLives; i++) { // Push-back lives shapes to Figures{}
-        Square *life = new Square((blackBorderSize.x+10)+i*10*2, SCREEN_H-blackBorderSize.y/2, 0, 0, 10, 10, white, false);
+        Square *life = new Square((blackBorderSize.x+10)+i*10*2, SCREEN_H-blackBorderSize.y/2, 0, 0, 10, 10, white, false, true);
         Add(life);
     }
 }
@@ -48,8 +49,11 @@ void Pong::Next() { // Game loop
     if (Physics::CollideCheck(Figures[ball], Figures[racketRight]) && !ballCollideSides)  {
         // Scoring condtitionals -> ball behavior
         Figures[ball]->vel.x *= 1.05;
-        if (Figures[ball]->vel.x > 30) {
+        if (Figures[ball]->vel.x > 20) {
             Figures[ball]->ResetVel();
+        }
+        if (score > 1) {
+            Figures[ring]->drawable = true; // Makes the ring visible
         }
 
         score++;
@@ -70,6 +74,8 @@ void Pong::Next() { // Game loop
         ballCollideSides = false;
     }
 
+    Physics::Anchor(Figures[ring], Figures[ball]); // Ring always follows the ball
+
     // Lose game condition
     if (lives < 1) {
         Figures[playingArea]->color = Colors[3];
@@ -88,7 +94,7 @@ void Pong::Next() { // Game loop
 }
 void Pong::Draw() {
     al_clear_to_color(al_map_rgb(0, 0, 0));
-    std::for_each(Figures.cbegin(), Figures.cend(), [](Figure* figure){figure->Draw();});
+    std::for_each(Figures.cbegin(), Figures.cend(), [](Figure* figure){if (figure->drawable){figure->Draw();}});
 }
 void Pong::Add(Figure* figure) {
     Figures.push_back(figure);

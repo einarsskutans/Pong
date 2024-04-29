@@ -4,7 +4,6 @@
 #include <iostream>
 #include "windows.h"
 #include <allegro5/allegro_windows.h>
-#include <allegro5/allegro_image.h>
 #include <allegro5/allegro.h>
 
 using namespace std;
@@ -63,7 +62,6 @@ bool AllegroBase::Init( int screenWidth, int screenHeight, int fps )
         cout << "failed to install keyboard" << endl;
         return false;
     }
-    al_init_image_addon();
 
     al_register_event_source( alEventQueue_, al_get_display_event_source( alDisplay_ ) );
     al_register_event_source( alEventQueue_, al_get_timer_event_source( alTimer_ ) );
