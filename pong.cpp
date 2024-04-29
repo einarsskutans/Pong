@@ -16,8 +16,8 @@ Pong& Pong::GetInstance() { // Singleton
 Pong::Pong() {
     std::cout << "\nDefault constructor called PONG " << this;
 
-    Color white(255, 255, 255), blueBorder(71, 147, 175), black(0, 0, 0), gray(96, 96, 96), red(255, 0, 0); // Declare some colors
-    Colors = {white, blueBorder, black, gray};
+    Color white(255, 255, 255), blueBorder(71, 147, 175), black(0, 0, 0), gray(96, 96, 96), red(200, 0, 0); // Declare some colors
+    Colors = {white, blueBorder, black, gray, red};
     Circle *ball = new Circle(SCREEN_W/2, SCREEN_H/2, 10, 5, 25, 25, black, true, true);
     Ring *ring = new Ring(0, 0, 0, 0, 50, 50, 2, gray, blueBorder, true, false);
     ball->SetDefaultVel(Center(10, 5));
@@ -52,8 +52,15 @@ void Pong::Next() { // Game loop
         if (Figures[ball]->vel.x > 20) {
             Figures[ball]->ResetVel();
         }
-        if (score > 1) {
-            Figures[ring]->drawable = true; // Makes the ring visible
+        switch (score)
+        {
+        case 12:
+            Figures[ball]->drawable = true; // Turn the ring visible
+            break;
+        case 24:
+            Figures[ring]->color.b -= 55; Figures[ring]->color.r -= 55;
+        case 30:
+            Figures[ring]->color = Colors[4];
         }
 
         score++;
