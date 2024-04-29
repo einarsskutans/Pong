@@ -19,6 +19,7 @@ Pong::Pong() {
     Color white(255, 255, 255), blueBorder(71, 147, 175), black(0, 0, 0), gray(96, 96, 96), red(255, 0, 0); // Declare some colors
     Colors = {white, blueBorder, black, gray};
     Circle *ball = new Circle(SCREEN_W/2, SCREEN_H/2, 10, 5, 25, 25, black, true);
+    ball->SetDefaultVel(Center(10, 5));
     Square *playingArea = new Square(SCREEN_W/2, SCREEN_H/2, 0, 0, SCREEN_W - SCREEN_W/8, SCREEN_H - SCREEN_H/8, blueBorder, false);
     Square *racketLeft = new Square(playingArea->pos.x - playingArea->size.x/2 - 10, playingArea->pos.y, 0, 0, 20, playingArea->size.y/4, white, true);
     Square *racketRight = new Square(playingArea->pos.x + playingArea->size.x/2 + 10, playingArea->pos.y, 0, 0, 20, playingArea->size.y/4, white, true);
@@ -45,6 +46,12 @@ void Pong::Next() { // Game loop
     Physics::RacketFollowBall(Figures[racketLeft], Figures[ball], Figures[playingArea]); // Left racket has no collision checks, it's purely deco
 
     if (Physics::CollideCheck(Figures[ball], Figures[racketRight]) && !ballCollideSides)  {
+        // Scoring condtitionals -> ball behavior
+        Figures[ball]->vel.x *= 1.05;
+        if (Figures[ball]->vel.x > 30) {
+            Figures[ball]->ResetVel();
+        }
+
         score++;
         ballCollideSides = true;
     }
@@ -61,23 +68,6 @@ void Pong::Next() { // Game loop
         Figures[ball]->pos.x + Figures[ball]->size.x/2 < Figures[playingArea]->pos.x + Figures[playingArea]->size.x/2
     ) {
         ballCollideSides = false;
-    }
-
-    // Scoring conditionals
-    if (score%7 == 0) {
-        Figures[ball]->vel.x *= 1.5;
-        score++;
-    }
-    switch (score)
-    {
-    case 6:
-        Figures[ball]->vel.y *= 2;
-        score++;
-        break;
-    case 8:
-        Figures[ball]->vel.y /= 2;
-        score ++;
-        break;
     }
 
     // Lose game condition

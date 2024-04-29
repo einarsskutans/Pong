@@ -12,6 +12,10 @@ class Figure {
         bool movable;
         Center pos, vel, size;
         Color color;
+        void SetDefaultVel(Center pvel);
+        void ResetVel();
+    private:
+        Center defaultVel;
 };
 
 #endif
