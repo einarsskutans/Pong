@@ -19,6 +19,7 @@ Pong::Pong() {
     Color white(255, 255, 255), blueBorder(71, 147, 175), black(0, 0, 0), gray(96, 96, 96), red(200, 0, 0); // Declare some colors
     Colors = {white, blueBorder, black, gray, red};
     Circle *ball = new Circle(SCREEN_W/2, SCREEN_H/2, 10, 5, 25, 25, black, true, true);
+    Circle *ball2 = new Circle(SCREEN_W/2, SCREEN_H/2, 5, 5, 20, 20, black, true, false);
     Ring *ring = new Ring(0, 0, 0, 0, 50, 50, 2, gray, blueBorder, true, false);
     ball->SetDefaultVel(Center(10, 5));
     Square *playingArea = new Square(SCREEN_W/2, SCREEN_H/2, 0, 0, SCREEN_W - SCREEN_W/8, SCREEN_H - SCREEN_H/8, blueBorder, false, true);
@@ -48,19 +49,12 @@ void Pong::Next() { // Game loop
 
     if (Physics::CollideCheck(Figures[ball], Figures[racketRight]) && !ballCollideSides)  {
         // Scoring condtitionals -> ball behavior
-
         if (Figures[ball]->vel.x < 20) {
-            Figures[ball]->vel.x *= 1.05;
+            Figures[ball]->vel.x *= 1.025;
+            Figures[ball]->vel.y *= 1.02;
         }
-        switch (score)
-        {
-        case 12:
-            Figures[ring]->drawable = true; // Turn the ring visible
-            break;
-        case 24:
-            Figures[ring]->color.b -= 55; Figures[ring]->color.r -= 55;
-        case 30:
-            Figures[ring]->color = Colors[4];
+        if (score == 2) {
+            Figures[ball2]->drawable = true;
         }
 
         score++;
