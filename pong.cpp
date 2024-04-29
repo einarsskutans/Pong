@@ -23,6 +23,13 @@ Pong::Pong() {
     Square *racketLeft = new Square(playingArea->pos.x - playingArea->size.x/2 - 10, playingArea->pos.y, 0, 0, 20, playingArea->size.y/4, white, true);
     Square *racketRight = new Square(playingArea->pos.x + playingArea->size.x/2 + 10, playingArea->pos.y, 0, 0, 20, playingArea->size.y/4, white, true);
     Figures = {playingArea, ball, racketLeft, racketRight}; // Removed a bunch of Add() to reduce lines
+
+    blackBorderSize = Center((SCREEN_W-playingArea->size.x)/2, (SCREEN_H-playingArea->size.y)/2);
+
+    for (int i = 0; i < maxLives; i++) {
+        Square *life = new Square((blackBorderSize.x+10)+i*10*2, SCREEN_H-blackBorderSize.y/2, 0, 0, 10, 10, white, false);
+        Add(life);
+    }
 }
 Pong::~Pong() {
     std::cout << "\nDestructor called PONG " << this;
@@ -44,8 +51,7 @@ void Pong::Next() { // Game loop
     ) {
         ballCollide = true;
         lives--;
-        if (lives == maxLives - 1) {Figures[racketRight]->color = Colors[2];};
-        Figures[racketRight]->color.r += 255/maxLives;
+        Figures.pop_back();
     } else if (
         !Physics::CollideCheck(Figures[ball], Figures[racketRight]) &&
         Figures[ball]->pos.x + Figures[ball]->size.x/2 < Figures[playingArea]->pos.x + Figures[playingArea]->size.x/2
