@@ -44,6 +44,10 @@ void Pong::Next() { // Game loop
     Physics::CollideInnerBounds(Figures[ball], Figures[playingArea]);
     Physics::RacketFollowBall(Figures[racketLeft], Figures[ball], Figures[playingArea]); // Left racket has no collision checks, it's purely deco
 
+    if (Physics::CollideCheck(Figures[ball], Figures[racketRight]) && !ballCollideSides)  {
+        score++;
+        ballCollideSides = true;
+    }
     if (
         !Physics::CollideCheck(Figures[ball], Figures[racketRight]) &&
         Figures[ball]->pos.x + Figures[ball]->size.x/2 >= Figures[playingArea]->pos.x + Figures[playingArea]->size.x/2 &&
@@ -57,6 +61,23 @@ void Pong::Next() { // Game loop
         Figures[ball]->pos.x + Figures[ball]->size.x/2 < Figures[playingArea]->pos.x + Figures[playingArea]->size.x/2
     ) {
         ballCollideSides = false;
+    }
+
+    // Scoring conditionals
+    if (score%7 == 0) {
+        Figures[ball]->vel.x *= 1.5;
+        score++;
+    }
+    switch (score)
+    {
+    case 6:
+        Figures[ball]->vel.y *= 2;
+        score++;
+        break;
+    case 8:
+        Figures[ball]->vel.y /= 2;
+        score ++;
+        break;
     }
 
     // Lose game condition
