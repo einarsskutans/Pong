@@ -16,8 +16,6 @@ class Pong {
         std::vector<Figure*> Figures;
         std::vector<Color> Colors;
         std::vector<Figure*> LivesFigures;
-        int maxLives = 5;
-        int lives = maxLives;
         enum FiguresIDs {
             playingArea,
             ball,
@@ -28,7 +26,9 @@ class Pong {
         Pong();
         ~Pong();
         Center blackBorderSize;
-        
+        int maxLives = 5;
+        int lives = maxLives;
+        int score;
 };
 
 #endif

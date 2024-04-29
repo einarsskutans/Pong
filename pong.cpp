@@ -26,7 +26,7 @@ Pong::Pong() {
 
     blackBorderSize = Center((SCREEN_W-playingArea->size.x)/2, (SCREEN_H-playingArea->size.y)/2);
 
-    for (int i = 0; i < maxLives; i++) {
+    for (int i = 0; i < maxLives; i++) { // Push-back lives shapes to Figures{}
         Square *life = new Square((blackBorderSize.x+10)+i*10*2, SCREEN_H-blackBorderSize.y/2, 0, 0, 10, 10, white, false);
         Add(life);
     }
@@ -38,7 +38,7 @@ Pong::~Pong() {
 }
 
 int startingTicks = 0; // Too lazy for deltaTime this works
-bool ballCollide; // Ensures proper lives variable subtraction
+bool ballCollideSides; // Ensures proper lives variable subtraction
 
 void Pong::Next() { // Game loop
     Physics::CollideInnerBounds(Figures[ball], Figures[playingArea]);
@@ -47,16 +47,16 @@ void Pong::Next() { // Game loop
     if (
         !Physics::CollideCheck(Figures[ball], Figures[racketRight]) &&
         Figures[ball]->pos.x + Figures[ball]->size.x/2 >= Figures[playingArea]->pos.x + Figures[playingArea]->size.x/2 &&
-        !ballCollide
+        !ballCollideSides
     ) {
-        ballCollide = true;
+        ballCollideSides = true;
         lives--;
-        Figures.pop_back();
+        Figures.pop_back(); // Pops the life shapes, risky without a conditional ._.
     } else if (
         !Physics::CollideCheck(Figures[ball], Figures[racketRight]) &&
         Figures[ball]->pos.x + Figures[ball]->size.x/2 < Figures[playingArea]->pos.x + Figures[playingArea]->size.x/2
     ) {
-        ballCollide = false;
+        ballCollideSides = false;
     }
 
     // Lose game condition
