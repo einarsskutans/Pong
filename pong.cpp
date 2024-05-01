@@ -70,7 +70,7 @@ void Pong::Next() { // Game loop
     ) {
         ballCollideSides = true;
         lives--;
-        static_cast<SquareGroup*>(Figures[lifeSquares])->figures.pop_back();
+        dynamic_cast<SquareGroup*>(Figures[lifeSquares])->figures.pop_back();
     } else if (
         !Physics::CollideCheck(Figures[ball], Figures[racketRight]) &&
         Figures[ball]->pos.x + Figures[ball]->size.x/2 < Figures[playingArea]->pos.x + Figures[playingArea]->size.x/2
