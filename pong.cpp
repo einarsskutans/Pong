@@ -29,11 +29,10 @@ Pong::Pong() {
         Square *life = new Square(0, 0, 0, 0, 12, 12, white, false, true);
         livesVector.push_back(life);
     }
-    SquareGroup *lives = new SquareGroup(livesVector, 30, 0, 500, 500, 0, 0, 24*maxLives, 24, gray, false, true);
+    blackBorderSize = Center((SCREEN_W-playingArea->size.x)/2, (SCREEN_H-playingArea->size.y)/2);
+    SquareGroup *lives = new SquareGroup(livesVector, 30, 0, blackBorderSize.x+10, SCREEN_H-blackBorderSize.y/2, 0, 0, 24, 24, black, false, true);
 
     Figures = {playingArea, ring, ball, racketLeft, racketRight, lives}; // Removed a bunch of Add() to reduce lines
-
-    blackBorderSize = Center((SCREEN_W-playingArea->size.x)/2, (SCREEN_H-playingArea->size.y)/2);
     /*
     for (int i = 0; i < maxLives; i++) { // Push-back lives shapes to Figures{}
         Square *life = new Square((blackBorderSize.x+10)+i*10*2, SCREEN_H-blackBorderSize.y/2, 0, 0, 10, 10, white, false, true);
@@ -71,7 +70,7 @@ void Pong::Next() { // Game loop
     ) {
         ballCollideSides = true;
         lives--;
-        //Figures.pop_back(); // Pops the life shapes, risky without a conditional ._.
+        static_cast<SquareGroup*>(Figures[lifeSquares])->figures.pop_back();
     } else if (
         !Physics::CollideCheck(Figures[ball], Figures[racketRight]) &&
         Figures[ball]->pos.x + Figures[ball]->size.x/2 < Figures[playingArea]->pos.x + Figures[playingArea]->size.x/2
