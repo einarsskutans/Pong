@@ -29,7 +29,7 @@ Pong::Pong() {
         Square *life = new Square(0, 0, 0, 0, 12, 12, white, false, true);
         livesVector.push_back(life);
     }
-    SquareGroup *lives = new SquareGroup(livesVector, 5, 0, 500, 500, 0, 0, 100, 100, red, false, true);
+    SquareGroup *lives = new SquareGroup(livesVector, 30, 0, 500, 500, 0, 0, 24*maxLives, 24, gray, false, true);
 
     Figures = {playingArea, ring, ball, racketLeft, racketRight, lives}; // Removed a bunch of Add() to reduce lines
 
