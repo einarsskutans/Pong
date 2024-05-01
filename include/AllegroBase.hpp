@@ -4,7 +4,16 @@
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
-#include <allegro5/allegro_font.h>
+
+#include "pong.h"
+#include "circle.h"
+#include "figure.h"
+#include "physics.h"
+#include "pong.h"
+#include "square.h"
+#include "util.h"
+#include "ring.h"
+#include "squareGroup.h"
 
 const int FPS = 60;
 const int SCREEN_W = 1080;

@@ -4,7 +4,6 @@
 #include <vector>
 
 #include "AllegroBase.hpp"
-#include "circle.h"
 #include "figure.h"
 
 class Pong {
@@ -13,18 +12,24 @@ class Pong {
         void Next();
         void Draw();
         void Add(Figure* Figure);
+
         std::vector<Figure*> Figures;
         std::vector<Color> Colors;
+        std::vector<Figure*> LivesFigures;
         enum FiguresIDs {
             playingArea,
+            ring,
             ball,
             racketLeft,
-            racketRight
+            racketRight,
         };
     private:
         Pong();
         ~Pong();
-        
+        Center blackBorderSize;
+        int maxLives = 5;
+        int lives = maxLives;
+        int score;
 };
 
 #endif

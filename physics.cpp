@@ -1,6 +1,4 @@
-#include "include/physics.h"
-#include "include/figure.h"
-#include "include/pong.h"
+#include "include/AllegroBase.hpp"
 
 void Physics::CollideBounds(Figure* figure) {
     
@@ -38,5 +36,11 @@ void Physics::RacketFollowBall(Figure* figure1, Figure* figure2, Figure* figure3
         figure2->pos.y > figure3->pos.y-figure3->size.y/2 + figure1->size.y/2
     ) {
         figure1->pos.y = figure2->pos.y;
+    }
 }
+void Physics::Anchor(Figure* figure1, Figure* figure2) {
+    if (figure1->movable) {
+        figure1->pos = figure2->pos;
+        figure1->vel = figure2->vel;
+    }
 }

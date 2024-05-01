@@ -7,11 +7,15 @@
 
 class Figure {
     public:
-        void Move(int px, int py);
+        void Move(double px, double py);
         virtual void Draw() = 0;
-        bool movable;
+        bool movable, drawable;
         Center pos, vel, size;
         Color color;
+        void SetDefaultVel(Center pvel);
+        void ResetVel();
+    private:
+        Center defaultVel;
 };
 
 #endif

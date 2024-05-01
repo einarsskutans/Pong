@@ -1,14 +1,10 @@
 #include <iostream>
-#include "include/AllegroBase.hpp"
 #include <windows.h>
 #include <cstdlib>
 #include <cstdio>
 
-#include "include/figure.h"
-#include "include/circle.h"
-#include "include/square.h"
-#include "include/util.h"
-#include "include/pong.h"
+#include "include/AllegroBase.hpp"
+
 using namespace std;
 
 class AllegroApp : public AllegroBase {

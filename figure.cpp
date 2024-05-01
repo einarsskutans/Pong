@@ -1,9 +1,14 @@
 #include <iostream>
 
 #include "include/figure.h"
-#include "include/physics.h"
 
-void Figure::Move(int px, int py) {
+void Figure::Move(double px, double py) {
     pos.x = px;
     pos.y = py;
+}
+void Figure::SetDefaultVel(Center pvel) {
+    defaultVel = pvel;
+}
+void Figure::ResetVel() {
+    vel = defaultVel;
 }

@@ -4,8 +4,7 @@
 #include <iostream>
 #include "windows.h"
 #include <allegro5/allegro_windows.h>
-#include <allegro5/allegro_font.h>
-#include <allegro5/allegro>
+#include <allegro5/allegro.h>
 
 using namespace std;
 
@@ -93,16 +92,14 @@ void AllegroBase::Destroy()
         al_destroy_event_queue( alEventQueue_ );
         alEventQueue_ = 0;
     }
-
 }
 
 void AllegroBase::Run()
 {
+
     // clear screen
     al_clear_to_color( al_map_rgb( 0, 0, 0 ) );
     al_flip_display();
-
-    al_init_font_addon();
 
     al_start_timer( alTimer_ );
 
