@@ -23,6 +23,7 @@ class Pong {
             ball2,
             racketLeft,
             racketRight,
+            lifeSquares,
         };
     private:
         Pong();

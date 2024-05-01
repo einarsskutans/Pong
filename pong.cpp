@@ -19,20 +19,26 @@ Pong::Pong() {
     Color white(255, 255, 255), blueBorder(71, 147, 175), black(0, 0, 0), gray(96, 96, 96), red(200, 0, 0); // Declare some colors
     Colors = {white, blueBorder, black, gray, red};
     Circle *ball = new Circle(SCREEN_W/2, SCREEN_H/2, 10, 5, 25, 25, black, true, true);
-    Circle *ball2 = new Circle(SCREEN_W/2, SCREEN_H/2, 5, 5, 20, 20, black, true, false);
     Ring *ring = new Ring(0, 0, 0, 0, 50, 50, 2, gray, blueBorder, true, false);
     ball->SetDefaultVel(Center(10, 5));
     Square *playingArea = new Square(SCREEN_W/2, SCREEN_H/2, 0, 0, SCREEN_W - SCREEN_W/8, SCREEN_H - SCREEN_H/8, blueBorder, false, true);
     Square *racketLeft = new Square(playingArea->pos.x - playingArea->size.x/2 - 10, playingArea->pos.y, 0, 0, 20, playingArea->size.y/4, white, true, true);
     Square *racketRight = new Square(playingArea->pos.x + playingArea->size.x/2 + 10, playingArea->pos.y, 0, 0, 20, playingArea->size.y/4, white, true, true);
-    Figures = {playingArea, ring, ball, racketLeft, racketRight}; // Removed a bunch of Add() to reduce lines
-
+    std::vector<Figure*> livesVector;
+    for (int i = 0; i < 5; i++) { // Push-back lives shapes to Figures{}
+        Square *life = new Square(0, 0, 0, 0, 12, 12, white, false, true);
+        livesVector.push_back(life);
+    }
     blackBorderSize = Center((SCREEN_W-playingArea->size.x)/2, (SCREEN_H-playingArea->size.y)/2);
+    SquareGroup *lives = new SquareGroup(livesVector, 30, 0, blackBorderSize.x+10, SCREEN_H-blackBorderSize.y/2, 0, 0, 24, 24, black, false, true);
 
+    Figures = {playingArea, ring, ball, racketLeft, racketRight, lives}; // Removed a bunch of Add() to reduce lines
+    /*
     for (int i = 0; i < maxLives; i++) { // Push-back lives shapes to Figures{}
         Square *life = new Square((blackBorderSize.x+10)+i*10*2, SCREEN_H-blackBorderSize.y/2, 0, 0, 10, 10, white, false, true);
         Add(life);
     }
+    */
 }
 Pong::~Pong() {
     std::cout << "\nDestructor called PONG " << this;
@@ -53,9 +59,6 @@ void Pong::Next() { // Game loop
             Figures[ball]->vel.x *= 1.025;
             Figures[ball]->vel.y *= 1.02;
         }
-        if (score == 2) {
-            Figures[ball2]->drawable = true;
-        }
 
         score++;
         ballCollideSides = true;
@@ -67,7 +70,7 @@ void Pong::Next() { // Game loop
     ) {
         ballCollideSides = true;
         lives--;
-        Figures.pop_back(); // Pops the life shapes, risky without a conditional ._.
+        dynamic_cast<SquareGroup*>(Figures[lifeSquares])->figures.pop_back();
     } else if (
         !Physics::CollideCheck(Figures[ball], Figures[racketRight]) &&
         Figures[ball]->pos.x + Figures[ball]->size.x/2 < Figures[playingArea]->pos.x + Figures[playingArea]->size.x/2
