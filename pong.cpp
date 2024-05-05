@@ -34,7 +34,7 @@ Pong::Pong() {
     }
     SquareGroup *lives = new SquareGroup(livesVector, 30, 0, blackBorderSize.x+10, SCREEN_H-blackBorderSize.y/2, 0, 0, 24, 24, black, false, true);
 
-    Figures = {playingArea, ball, racketLeft, racketRight, lives}; // Removed a bunch of Add() to reduce lines
+    Figures = {playingArea, ball, racketLeft, racketRight, lives};
 }
 Pong::~Pong() {
     std::cout << "\nDestructor called PONG " << this;
@@ -46,6 +46,7 @@ int startingTicks = 0; // Too lazy for deltaTime this works
 bool ballCollideSides; // Ensures proper lives variable subtraction
 
 void Pong::Next() { // Game loop
+    std::cout << (Figures[ball]->vel + Figures[racketRight]->pos).x << "\t" << (Figures[ball]->vel + Figures[racketRight]->pos).y << " \n";
     Physics::CollideInnerBounds(Figures[ball], Figures[playingArea]);
     Physics::RacketFollowBall(Figures[racketLeft], Figures[ball], Figures[playingArea]); // Left racket has no collision checks, it's purely deco
 
@@ -84,7 +85,7 @@ void Pong::Next() { // Game loop
     if (startingTicks > 60 * 2) {
         for (Figure* figure : Figures) { // Add velocity
             if (figure->movable) {
-                figure->Move(figure->pos.x + figure->vel.x, figure->pos.y + figure->vel.y);
+                figure->Move(figure->vel.x + figure->pos.x, figure->vel.y + figure->pos.y);
             }
         }
     }

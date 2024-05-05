@@ -8,6 +8,7 @@ struct Center {
     Center(double px, double py);
     ~Center();
     double x, y;
+    Center operator+(const Center& center);
 };
 struct Color {
     Color();
