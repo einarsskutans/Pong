@@ -20,7 +20,6 @@ class Pong {
             playingArea,
             ring,
             ball,
-            ball2,
             racketLeft,
             racketRight,
             lifeSquares,

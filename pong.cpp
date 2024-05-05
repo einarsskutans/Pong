@@ -33,12 +33,6 @@ Pong::Pong() {
     SquareGroup *lives = new SquareGroup(livesVector, 30, 0, blackBorderSize.x+10, SCREEN_H-blackBorderSize.y/2, 0, 0, 24, 24, black, false, true);
 
     Figures = {playingArea, ring, ball, racketLeft, racketRight, lives}; // Removed a bunch of Add() to reduce lines
-    /*
-    for (int i = 0; i < maxLives; i++) { // Push-back lives shapes to Figures{}
-        Square *life = new Square((blackBorderSize.x+10)+i*10*2, SCREEN_H-blackBorderSize.y/2, 0, 0, 10, 10, white, false, true);
-        Add(life);
-    }
-    */
 }
 Pong::~Pong() {
     std::cout << "\nDestructor called PONG " << this;
