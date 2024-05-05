@@ -18,7 +18,6 @@ class Pong {
         std::vector<Figure*> LivesFigures;
         enum FiguresIDs {
             playingArea,
-            ring,
             ball,
             racketLeft,
             racketRight,
