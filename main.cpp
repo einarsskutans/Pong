@@ -16,6 +16,10 @@ class AllegroApp : public AllegroBase {
             if (!Pong::GetInstance().gameRuns) {
                 if (IsPressed(ALLEGRO_KEY_SPACE)) {
                     Pong::GetInstance().gameRuns = true;
+                    if (dynamic_cast<SquareGroup*>(Pong::GetInstance().Figures[Pong::lifeSquares])->figures.size() < 1) {
+                        Square *life = new Square(0, 0, 0, 0, 12, 12, Color(255, 255, 255), false, true);
+                        dynamic_cast<SquareGroup*>(Pong::GetInstance().Figures[Pong::lifeSquares])->figures.push_back(life);
+                    }
                 }
                 for (int i = 28; i < 37; i++) {
                     if (IsPressed(i)) {

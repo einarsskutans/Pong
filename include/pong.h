@@ -29,7 +29,7 @@ class Pong {
     private:
         Pong();
         ~Pong();
-        int maxLives = 5;
+        int maxLives = 1;
         int lives = maxLives;
         Center blackBorderSize;
         int score;
