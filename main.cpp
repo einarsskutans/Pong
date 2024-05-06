@@ -21,11 +21,11 @@ class AllegroApp : public AllegroBase {
                     if (IsPressed(i)) {
                         Pong::GetInstance().SetMaxLives(i - 28 + 1);
 
-                        std::for_each(dynamic_cast<SquareGroup*>(Pong::GetInstance().Figures[Pong::lifeSquares])->figures.cbegin(), dynamic_cast<SquareGroup*>(Pong::GetInstance().Figures[Pong::lifeSquares])->figures.cend(), [](Figure* figure){delete figure;});
-                        dynamic_cast<SquareGroup*>(Pong::GetInstance().Figures[Pong::lifeSquares])->figures = {};
+                        
+                        dynamic_cast<SquareGroup&>(*Pong::GetInstance().Figures[Pong::lifeSquares]).figures = {};
                         for (int i = 0; i < Pong::GetInstance().GetMaxLives(); i++) {
-                            Square *life = new Square(0, 0, 0, 0, 12, 12, Color(255, 255, 255), false, true);
-                            dynamic_cast<SquareGroup*>(Pong::GetInstance().Figures[Pong::lifeSquares])->figures.push_back(life);
+                            auto life = std::make_shared<Square>(new Square(0, 0, 0, 0, 12, 12, Color(255, 255, 255), false, true));
+                            dynamic_cast<SquareGroup&>(*Pong::GetInstance().Figures[Pong::lifeSquares]).figures.push_back(life);
                         }
                     }
                 }
