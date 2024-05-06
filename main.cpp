@@ -16,15 +16,17 @@ class AllegroApp : public AllegroBase {
             if (!Pong::GetInstance().gameRuns) {
                 if (IsPressed(ALLEGRO_KEY_SPACE)) {
                     Pong::GetInstance().gameRuns = true;
-
-                    for (int i = 0; i < Pong::GetInstance().GetMaxLives(); i++) {
-                        Square *life = new Square(0, 0, 0, 0, 12, 12, Color(255, 255, 255), false, true);
-                        dynamic_cast<SquareGroup*>(Pong::GetInstance().Figures[Pong::lifeSquares])->figures.push_back(life);
-                    }
                 }
                 for (int i = 28; i < 37; i++) {
                     if (IsPressed(i)) {
                         Pong::GetInstance().SetMaxLives(i - 28 + 1);
+
+                        std::for_each(dynamic_cast<SquareGroup*>(Pong::GetInstance().Figures[Pong::lifeSquares])->figures.cbegin(), dynamic_cast<SquareGroup*>(Pong::GetInstance().Figures[Pong::lifeSquares])->figures.cend(), [](Figure* figure){delete figure;});
+                        dynamic_cast<SquareGroup*>(Pong::GetInstance().Figures[Pong::lifeSquares])->figures = {};
+                        for (int i = 0; i < Pong::GetInstance().GetMaxLives(); i++) {
+                            Square *life = new Square(0, 0, 0, 0, 12, 12, Color(255, 255, 255), false, true);
+                            dynamic_cast<SquareGroup*>(Pong::GetInstance().Figures[Pong::lifeSquares])->figures.push_back(life);
+                        }
                     }
                 }
             }

@@ -40,7 +40,7 @@ Pong::~Pong() {
 bool ballCollideSides; // Ensures proper lives variable subtraction
 
 void Pong::Next() { // Game loop
-    std::cout << (Figures[ball]->vel + Figures[racketRight]->pos).x << "\t" << (Figures[ball]->vel + Figures[racketRight]->pos).y << " \n";
+    //std::cout << (Figures[ball]->vel + Figures[racketRight]->pos).x << "\t" << (Figures[ball]->vel + Figures[racketRight]->pos).y << " \n";
     Physics::CollideInnerBounds(Figures[ball], Figures[playingArea]);
     Physics::RacketFollowBall(Figures[racketLeft], Figures[ball], Figures[playingArea]); // Left racket has no collision checks, it's purely deco
 
