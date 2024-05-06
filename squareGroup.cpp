@@ -8,10 +8,10 @@
 SquareGroup::SquareGroup() {
     std::cout << "\nDefault constructor called SQUAREGROUP " << this;
 }
-SquareGroup::SquareGroup(std::vector<Figure*> pfigures, double pfiguresgapx, double pfiguresgapy, double px, double py, double pvelx, double pvely, double psizex, double psizey, Color pcolor, bool pmovable, bool pdrawable) {
+SquareGroup::SquareGroup( double pfiguresgapx, double pfiguresgapy, double px, double py, double pvelx, double pvely, double psizex, double psizey, Color pcolor, bool pmovable, bool pdrawable) {
     std::cout << "\nConstructor called SQUAREGROUP " << this;
     pos.x = px, pos.y = py, vel.x = pvelx, vel.y = pvely, size.x = psizex, size.y = psizey, color = pcolor, movable = pmovable, drawable = pdrawable;
-    figures = pfigures;
+    //figures = pfigures;
     figuresgapx = pfiguresgapx;
     figuresgapy = pfiguresgapy;
 }

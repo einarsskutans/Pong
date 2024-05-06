@@ -27,14 +27,9 @@ Pong::Pong() {
     Square *racketRight = new Square(playingArea->pos.x + playingArea->size.x/2 + 10, playingArea->pos.y, 0, 0, 20, playingArea->size.y/4, white, true, true);
     
     blackBorderSize = Center((SCREEN_W-playingArea->size.x)/2, (SCREEN_H-playingArea->size.y)/2);
-    std::vector<Figure*> livesVector;
-    for (int i = 0; i < 5; i++) { // Push-back lives shapes to Figures{}
-        Square *life = new Square(0, 0, 0, 0, 12, 12, white, false, true);
-        livesVector.push_back(life);
-    }
-    SquareGroup *lives = new SquareGroup(livesVector, 30, 0, blackBorderSize.x+10, SCREEN_H-blackBorderSize.y/2, 0, 0, 24, 24, black, false, true);
-
-    Figures = {playingArea, ball, racketLeft, racketRight, lives};
+    //std::vector<Figure*> livesFigures;
+    SquareGroup *livesSquares = new SquareGroup(30, 0, blackBorderSize.x+10, SCREEN_H-blackBorderSize.y/2, 0, 0, 24, 24, black, false, true);
+    Figures = {playingArea, ball, racketLeft, racketRight, livesSquares};
 }
 Pong::~Pong() {
     std::cout << "\nDestructor called PONG " << this;
@@ -42,7 +37,6 @@ Pong::~Pong() {
     std::for_each(Figures.cbegin(), Figures.cend(), [](Figure* figure){delete figure;});
 }
 
-int startingTicks = 0; // Too lazy for deltaTime this works
 bool ballCollideSides; // Ensures proper lives variable subtraction
 
 void Pong::Next() { // Game loop
@@ -79,17 +73,17 @@ void Pong::Next() { // Game loop
     if (lives < 1) {
         Figures[playingArea]->color = Colors[3];
         std::for_each(Figures.cbegin(), Figures.cend(), [](Figure* figure){figure->movable = false;});
+        gameRuns = false;
     }
 
     // Move all figures
-    if (startingTicks > 60 * 2) {
+    if (gameRuns) {
         for (Figure* figure : Figures) { // Add velocity
             if (figure->movable) {
                 figure->Move(figure->vel.x + figure->pos.x, figure->vel.y + figure->pos.y);
             }
         }
     }
-    startingTicks++;
 }
 void Pong::Draw() {
     al_clear_to_color(al_map_rgb(0, 0, 0));
@@ -97,4 +91,14 @@ void Pong::Draw() {
 }
 void Pong::Add(Figure* figure) {
     Figures.push_back(figure);
+}
+
+//
+
+void Pong::SetMaxLives(int n) {
+    maxLives = n;
+    lives = maxLives;
+}
+int Pong::GetMaxLives() {
+    return maxLives;
 }

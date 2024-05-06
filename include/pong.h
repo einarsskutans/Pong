@@ -13,9 +13,11 @@ class Pong {
         void Draw();
         void Add(Figure* Figure);
 
+        void SetMaxLives(int n);
+        int GetMaxLives();
+
         std::vector<Figure*> Figures;
         std::vector<Color> Colors;
-        std::vector<Figure*> LivesFigures;
         enum FiguresIDs {
             playingArea,
             ball,
@@ -23,12 +25,13 @@ class Pong {
             racketRight,
             lifeSquares,
         };
+        bool gameRuns = false;
     private:
         Pong();
         ~Pong();
-        Center blackBorderSize;
         int maxLives = 5;
         int lives = maxLives;
+        Center blackBorderSize;
         int score;
 };
 

@@ -7,7 +7,7 @@
 class SquareGroup : public Figure {
     public:
         SquareGroup();
-        SquareGroup(std::vector<Figure*> pfigures, double pfiguresgapx, double pfiguresgapy, double px, double py, double pvelx, double pvely, double psizex, double psizey, Color pcolor, bool pmovabale, bool pdrawable);
+        SquareGroup(double pfiguresgapx, double pfiguresgapy, double px, double py, double pvelx, double pvely, double psizex, double psizey, Color pcolor, bool pmovabale, bool pdrawable);
         ~SquareGroup();
         void Draw();
         std::vector<Figure*> figures;
