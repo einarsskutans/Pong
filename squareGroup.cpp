@@ -21,7 +21,7 @@ SquareGroup::~SquareGroup() {
 void SquareGroup::Draw() {
     al_draw_rectangle(pos.x - size.x/2, pos.y - size.y/2, pos.x + size.x/2, pos.y + size.y/2, al_map_rgb(color.r, color.g, color.b), 1);
     int n = 0;
-    for (std::shared_ptr<Figure> figure : figures) {
+    for (Figure* figure : figures) {
         al_draw_filled_rectangle(pos.x - figure->size.x/2 + n*figuresgapx, pos.y - figure->size.y/2 + n*figuresgapy, pos.x + figure->size.x/2 + n*figuresgapx, pos.y + figure->size.y/2 + n*figuresgapy, al_map_rgb(figure->color.r, figure->color.g, figure->color.b));
         n++;
     }
