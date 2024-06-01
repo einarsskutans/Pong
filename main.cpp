@@ -21,7 +21,7 @@ class AllegroApp : public AllegroBase {
                         dynamic_cast<SquareGroup*>(Pong::GetInstance().Figures[Pong::lifeSquares])->figures.push_back(life);
                     }
                 }
-                for (int i = 28; i < 37; i++) {
+                for (int i = ALLEGRO_KEY_1; i < ALLEGRO_KEY_9; i++) { // Cycles through keys 1-9 to select game lives
                     if (IsPressed(i)) {
                         Pong::GetInstance().SetMaxLives(i - 28 + 1);
 
