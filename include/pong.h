@@ -11,12 +11,12 @@ class Pong {
         static Pong& GetInstance();
         void Next();
         void Draw();
-        void Add(Figure* Figure);
+        void Add(std::shared_ptr<Figure> Figure);
 
         void SetMaxLives(int n);
         int GetMaxLives();
 
-        std::vector<Figure*> Figures;
+        std::vector<std::shared_ptr<Figure>> Figures;
         std::vector<Color> Colors;
         enum FiguresIDs {
             playingArea,
@@ -29,7 +29,7 @@ class Pong {
     private:
         Pong();
         ~Pong();
-        int maxLives = 5;
+        int maxLives = 1;
         int lives = maxLives;
         Center blackBorderSize;
         int score;

@@ -20,7 +20,6 @@ Pong::Pong() {
     Colors = {white, blueBorder, black, gray, red};
 
     Circle *ball = new Circle(SCREEN_W/2, SCREEN_H/2, 10, 5, 25, 25, black, true, true);
-    Ring *ring = new Ring(0, 0, 0, 0, 50, 50, 2, gray, blueBorder, true, false);
     ball->SetDefaultVel(Center(10, 5));
     Square *playingArea = new Square(SCREEN_W/2, SCREEN_H/2, 0, 0, SCREEN_W - SCREEN_W/8, SCREEN_H - SCREEN_H/8, blueBorder, false, true);
     Square *racketLeft = new Square(playingArea->pos.x - playingArea->size.x/2 - 10, playingArea->pos.y, 0, 0, 20, playingArea->size.y/4, white, true, true);
