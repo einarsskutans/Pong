@@ -17,7 +17,7 @@ class AllegroApp : public AllegroBase {
                 if (IsPressed(ALLEGRO_KEY_SPACE)) {
                     Pong::GetInstance().gameRuns = true;
                     if (dynamic_cast<SquareGroup*>(Pong::GetInstance().Figures[Pong::lifeSquares])->figures.size() < 1) {
-                        Square *life = new Square(0, 0, 0, 0, 12, 12, Color(255, 255, 255), false, true);
+                        Square *life = new Square({0, 0}, {0, 0}, {12, 12}, Color(255, 255, 255), false, true);
                         dynamic_cast<SquareGroup*>(Pong::GetInstance().Figures[Pong::lifeSquares])->figures.push_back(life);
                     }
                 }
@@ -28,7 +28,7 @@ class AllegroApp : public AllegroBase {
                         std::for_each(dynamic_cast<SquareGroup*>(Pong::GetInstance().Figures[Pong::lifeSquares])->figures.cbegin(), dynamic_cast<SquareGroup*>(Pong::GetInstance().Figures[Pong::lifeSquares])->figures.cend(), [](Figure* figure){delete figure;});
                         dynamic_cast<SquareGroup*>(Pong::GetInstance().Figures[Pong::lifeSquares])->figures = {};
                         for (int i = 0; i < Pong::GetInstance().GetMaxLives(); i++) {
-                            Square *life = new Square(0, 0, 0, 0, 12, 12, Color(255, 255, 255), false, true);
+                            Square *life = new Square({0, 0}, {0, 0}, {12, 12}, Color(255, 255, 255), false, true);
                             dynamic_cast<SquareGroup*>(Pong::GetInstance().Figures[Pong::lifeSquares])->figures.push_back(life);
                         }
                     }
@@ -36,18 +36,18 @@ class AllegroApp : public AllegroBase {
             }
 
             if (Pong::GetInstance().gameRuns) {
-                Pong::GetInstance().Figures[Pong::racketRight]->vel.y = 0;
+                Pong::GetInstance().Figures[Pong::racketRight]->SetVel({0, 0}); // y
                 if (
                     IsPressed(ALLEGRO_KEY_DOWN) &&
-                    Pong::GetInstance().Figures[Pong::racketRight]->pos.y + Pong::GetInstance().Figures[Pong::racketRight]->size.y/2 < Pong::GetInstance().Figures[Pong::playingArea]->pos.y + Pong::GetInstance().Figures[Pong::playingArea]->size.y/2
+                    Pong::GetInstance().Figures[Pong::racketRight]->GetPos().y + Pong::GetInstance().Figures[Pong::racketRight]->GetSize().y/2 < Pong::GetInstance().Figures[Pong::playingArea]->GetPos().y + Pong::GetInstance().Figures[Pong::playingArea]->GetSize().y/2
                     ) {
-                    Pong::GetInstance().Figures[Pong::racketRight]->vel.y = 10;
+                    Pong::GetInstance().Figures[Pong::racketRight]->SetVel({0, 10});
                 }
                 if (
                     IsPressed(ALLEGRO_KEY_UP) &&
-                    Pong::GetInstance().Figures[Pong::racketRight]->pos.y - Pong::GetInstance().Figures[Pong::racketRight]->size.y/2 > Pong::GetInstance().Figures[Pong::playingArea]->pos.y - Pong::GetInstance().Figures[Pong::playingArea]->size.y/2
+                    Pong::GetInstance().Figures[Pong::racketRight]->GetPos().y - Pong::GetInstance().Figures[Pong::racketRight]->GetSize().y/2 > Pong::GetInstance().Figures[Pong::playingArea]->GetPos().y - Pong::GetInstance().Figures[Pong::playingArea]->GetSize().y/2
                     ) {
-                    Pong::GetInstance().Figures[Pong::racketRight]->vel.y = -10;
+                    Pong::GetInstance().Figures[Pong::racketRight]->SetVel({0, -10});
                 }
             }
         }

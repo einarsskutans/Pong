@@ -8,13 +8,18 @@
 Circle::Circle() {
     std::cout << "\nDefault constructor called CIRCLE " << this;
 }
-Circle::Circle(double px, double py, double pvelx, double pvely, double psizex, double psizey, Color pcolor, bool pmovable, bool pdrawable) {
+Circle::Circle(Center ppos, Center pvel, Center psize, Color pcolor, bool pmovable, bool pdrawable) {
     std::cout << "\nConstructor called CIRCLE " << this;
-    pos.x = px, pos.y = py, vel.x = pvelx, vel.y = pvely, size.x = psizex, size.y = psizey, color = pcolor, movable = pmovable, drawable = pdrawable;
+    SetPos(ppos);
+    SetVel(pvel);
+    SetSize(psize);
+
+    SetMovable(pmovable);
+    SetDrawable(pdrawable);
 }
 Circle::~Circle() {
     std::cout << "\nDestructor called CIRCLE " << this;
 }
 void Circle::Draw() {
-    al_draw_filled_circle(pos.x, pos.y, size.x/2, al_map_rgb(color.r, color.g, color.b));
+    al_draw_filled_circle(GetPos().x, GetPos().y, GetSize().x/2, al_map_rgb(color.r, color.g, color.b));
 }

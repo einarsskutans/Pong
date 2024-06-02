@@ -13,9 +13,7 @@
 #include "pong.h"
 #include "square.h"
 #include "util.h"
-#include "ring.h" // not used
 #include "squareGroup.h"
-#include "circleGroup.h" // not used
 
 const int FPS = 60;
 const int SCREEN_W = 1080;

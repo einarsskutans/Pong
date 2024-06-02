@@ -19,15 +19,15 @@ Pong::Pong() {
     Color white(255, 255, 255), blueBorder(71, 147, 175), black(0, 0, 0), gray(96, 96, 96), red(200, 0, 0); // Declare some colors
     Colors = {white, blueBorder, black, gray, red};
 
-    Circle *ball = new Circle(SCREEN_W/2, SCREEN_H/2, 10, 5, 25, 25, black, true, true);
+    Circle *ball = new Circle({SCREEN_W/2, SCREEN_H/2}, {10, 5}, {25, 25}, black, true, true);
     ball->SetDefaultVel(Center(10, 5));
-    Square *playingArea = new Square(SCREEN_W/2, SCREEN_H/2, 0, 0, SCREEN_W - SCREEN_W/8, SCREEN_H - SCREEN_H/8, blueBorder, false, true);
-    Square *racketLeft = new Square(playingArea->pos.x - playingArea->size.x/2 - 10, playingArea->pos.y, 0, 0, 20, playingArea->size.y/4, white, true, true);
-    Square *racketRight = new Square(playingArea->pos.x + playingArea->size.x/2 + 10, playingArea->pos.y, 0, 0, 20, playingArea->size.y/4, white, true, true);
+    Square *playingArea = new Square({SCREEN_W/2, SCREEN_H/2}, {0, 0}, {SCREEN_W - SCREEN_W/8, SCREEN_H - SCREEN_H/8}, blueBorder, false, true);
+    Square *racketLeft = new Square({playingArea->GetPos().x - playingArea->GetSize().x/2 - 10, playingArea->GetPos().y}, {0, 0}, {20, playingArea->GetSize().y/4}, white, true, true);
+    Square *racketRight = new Square({playingArea->GetPos().x + playingArea->GetSize().x/2 + 10, playingArea->GetPos().y}, {0, 0}, {20, playingArea->GetSize().y/4}, white, true, true);
     
-    blackBorderSize = Center((SCREEN_W-playingArea->size.x)/2, (SCREEN_H-playingArea->size.y)/2);
+    blackBorderSize = Center((SCREEN_W-playingArea->GetSize().x)/2, (SCREEN_H-playingArea->GetSize().y)/2);
     //std::vector<Figure*> livesFigures;
-    SquareGroup *livesSquares = new SquareGroup(30, 0, blackBorderSize.x+10, SCREEN_H-blackBorderSize.y/2, 0, 0, 24, 24, black, false, true);
+    SquareGroup *livesSquares = new SquareGroup({30, 0}, {blackBorderSize.x+10, SCREEN_H-blackBorderSize.y/2}, {0, 0}, {24, 24}, black, false, true);
     Figures = {playingArea, ball, racketLeft, racketRight, livesSquares};
 }
 Pong::~Pong() {
@@ -45,9 +45,9 @@ void Pong::Next() { // Game loop
 
     if (Physics::CollideCheck(Figures[ball], Figures[racketRight]) && !ballCollideSides)  {
         // Scoring condtitionals -> ball behavior
-        if (Figures[ball]->vel.x < 20) {
-            Figures[ball]->vel.x *= 1.025;
-            Figures[ball]->vel.y *= 1.02;
+        if (Figures[ball]->GetVel().x < 20) {
+            Figures[ball]->SetSize({Figures[ball]->GetSize().y, Figures[ball]->GetSize().x*1.025});
+            Figures[ball]->SetSize({Figures[ball]->GetSize().y*1.02, Figures[ball]->GetSize().x});
         }
 
         score++;
@@ -55,7 +55,7 @@ void Pong::Next() { // Game loop
     }
     if (
         !Physics::CollideCheck(Figures[ball], Figures[racketRight]) &&
-        Figures[ball]->pos.x + Figures[ball]->size.x/2 >= Figures[playingArea]->pos.x + Figures[playingArea]->size.x/2 &&
+        Figures[ball]->GetPos().x + Figures[ball]->GetSize().x/2 >= Figures[playingArea]->GetPos().x + Figures[playingArea]->GetSize().x/2 &&
         !ballCollideSides
     ) {
         ballCollideSides = true;
@@ -63,7 +63,7 @@ void Pong::Next() { // Game loop
         dynamic_cast<SquareGroup*>(Figures[lifeSquares])->figures.pop_back();
     } else if (
         !Physics::CollideCheck(Figures[ball], Figures[racketRight]) &&
-        Figures[ball]->pos.x + Figures[ball]->size.x/2 < Figures[playingArea]->pos.x + Figures[playingArea]->size.x/2
+        Figures[ball]->GetPos().x + Figures[ball]->GetSize().x/2 < Figures[playingArea]->GetPos().x + Figures[playingArea]->GetSize().x/2
     ) {
         ballCollideSides = false;
     }
@@ -71,22 +71,22 @@ void Pong::Next() { // Game loop
     // Lose game condition
     if (lives < 1) {
         Figures[playingArea]->color = Colors[3];
-        std::for_each(Figures.cbegin(), Figures.cend(), [](Figure* figure){figure->movable = false;});
+        std::for_each(Figures.cbegin(), Figures.cend(), [](Figure* figure){figure->SetMovable(false);});
         gameRuns = false;
     }
 
     // Move all figures
     if (gameRuns) {
         for (Figure* figure : Figures) { // Add velocity
-            if (figure->movable) {
-                figure->Move(figure->vel.x + figure->pos.x, figure->vel.y + figure->pos.y);
+            if (figure->IsMovable()) {
+                figure->Move(figure->GetVel().x + figure->GetPos().x, figure->GetVel().y + figure->GetPos().y);
             }
         }
     }
 }
 void Pong::Draw() {
     al_clear_to_color(al_map_rgb(0, 0, 0));
-    std::for_each(Figures.cbegin(), Figures.cend(), [](Figure* figure){if (figure->drawable){figure->Draw();}});
+    std::for_each(Figures.cbegin(), Figures.cend(), [](Figure* figure){if (figure->IsDrawable()){figure->Draw();}});
 }
 void Pong::Add(Figure* figure) {
     Figures.push_back(figure);

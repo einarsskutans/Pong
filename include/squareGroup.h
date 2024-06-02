@@ -7,11 +7,14 @@
 class SquareGroup : public Figure {
     public:
         SquareGroup();
-        SquareGroup(double pfiguresgapx, double pfiguresgapy, double px, double py, double pvelx, double pvely, double psizex, double psizey, Color pcolor, bool pmovabale, bool pdrawable);
+        SquareGroup(Center pfiguresgap, Center ppos, Center pvel, Center psize, Color pcolor, bool pmovabale, bool pdrawable);
         ~SquareGroup();
         void Draw();
+        
         std::vector<Figure*> figures;
-        double figuresgapx, figuresgapy;
+        Center figuresgap;
+        Center GetFiguresgap();
+        void SetFiguresgap(Center pfiguresgap);
 };
 
 #endif

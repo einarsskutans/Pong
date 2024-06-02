@@ -9,13 +9,27 @@ class Figure {
     public:
         void Move(double px, double py);
         virtual void Draw() = 0;
-        bool movable, drawable;
-        Center pos, vel, size;
-        Color color;
+
         void SetDefaultVel(Center pvel);
         void ResetVel();
+        Center GetSize();
+        Center GetPos();
+        Center GetVel();
+        void SetPos(Center ppos);
+        void SetVel(Center pvel);
+        void SetSize(Center psize);
+
+
+        bool IsMovable();
+        bool IsDrawable();
+        void SetMovable(bool pmovable);
+        void SetDrawable(bool pdrawable);
+
+        Color color;
     private:
         Center defaultVel;
+        Center pos, vel, size;
+        bool movable, drawable;
 };
 
 #endif
