@@ -16,6 +16,7 @@ Square::Square(Center ppos, Center pvel, Center psize, Color pcolor, bool pmovab
 
     SetMovable(pmovable);
     SetDrawable(pdrawable);
+    color = pcolor;
 }
 Square::~Square() {
     std::cout << "\nDestructor called SQUARE " << this;

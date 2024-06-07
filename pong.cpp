@@ -46,8 +46,8 @@ void Pong::Next() { // Game loop
     if (Physics::CollideCheck(Figures[ball], Figures[racketRight]) && !ballCollideSides)  {
         // Scoring condtitionals -> ball behavior
         if (Figures[ball]->GetVel().x < 20) {
-            Figures[ball]->SetSize({Figures[ball]->GetSize().y, Figures[ball]->GetSize().x*1.025});
-            Figures[ball]->SetSize({Figures[ball]->GetSize().y*1.02, Figures[ball]->GetSize().x});
+            Figures[ball]->SetVel({Figures[ball]->GetVel().y, Figures[ball]->GetVel().x*1.025});
+            Figures[ball]->SetVel({Figures[ball]->GetVel().y*1.02, Figures[ball]->GetVel().x});
         }
 
         score++;
