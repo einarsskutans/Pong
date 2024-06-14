@@ -62,6 +62,7 @@ int main(int argc, char **argv) {
     if ( !app.Init( SCREEN_W, SCREEN_H, FPS ) ) {
         return 1;
     }
+
     app.Run();
     return 0;
 }

@@ -8,7 +8,13 @@ struct Center {
     Center(double px, double py);
     ~Center();
     double x, y;
+
+    // Operator overloading
     Center operator+(const Center& center);
+    Center operator/(const Center& center);
+
+    bool operator<(const Center& center);
+    bool operator==(const Center& center);
 };
 struct Color {
     Color();

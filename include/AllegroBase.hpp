@@ -18,6 +18,7 @@
 const int FPS = 60;
 const int SCREEN_W = 1080;
 const int SCREEN_H = 720;
+const Center SCREEN_SIZE(1080, 720);
 
 class AllegroBase
 {
