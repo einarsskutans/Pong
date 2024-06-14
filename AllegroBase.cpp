@@ -63,6 +63,8 @@ bool AllegroBase::Init( int screenWidth, int screenHeight, int fps )
         return false;
     }
 
+    al_set_window_title(alDisplay_, "Pong");
+
     al_register_event_source( alEventQueue_, al_get_display_event_source( alDisplay_ ) );
     al_register_event_source( alEventQueue_, al_get_timer_event_source( alTimer_ ) );
     al_register_event_source( alEventQueue_, al_get_keyboard_event_source() );
